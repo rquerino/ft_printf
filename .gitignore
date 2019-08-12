@@ -1,0 +1,6 @@
+*.dSYM
+*.swp
+.nfs*
+*.o
+*.a
+*.out
