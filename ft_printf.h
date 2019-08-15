@@ -6,12 +6,13 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/12 21:44:11 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 09:58:45 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include "libft/libft.h"
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
@@ -36,11 +37,29 @@ typedef struct  s_flags
 	int		dollar;
 }               t_flags;
 
-void	ft_putchar(char c);
+
+/*
+** Functions
+*/
+
+int		ft_countargs(const char *str);
+void	ft_printflags(t_flags flags);
 int		ft_getwidth(const char *str, t_flags *flags, int i, int n);
 int		ft_getafterdot(const char *str, t_flags *flags, int i, int n);
 int		ft_checkflags(const char *str, t_flags *flags, int i, int n);
-void	ft_reader(const char *str, t_flags *flags);
+void	ft_reader(const char *str, va_list args, t_flags *flags);
 void	ft_startstruct(t_flags *flags, int n);
+int		ft_getlen(va_list args, int n);
+char	*ft_readflags(t_flags flags, int arg_len, va_list args, int n);
+void	ft_printer(va_list args, t_flags *flags, int n);
+
+/*
+** Functions for type 's'
+*/
+//char	*ft_printf_s(va_list args, t_flags *flags, int n);
+void	ft_printf_s(va_list args, t_flags flags);
+void	ft_checkwidth_s(t_flags flags, char *res, int len);
+void	ft_checkjwidth_s(t_flags flags, char *res);
+char	*ft_checkdot_s(t_flags flags, char *var);//, int len);
 
 #endif
