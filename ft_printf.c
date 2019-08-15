@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 11:06:43 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 14:18:34 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int	ft_printf(const char *str, ...)
 
 int	main()
 {
+	/*
 	//Testing 's'
 	ft_putstr("Testing 's':\n");
 	ft_putstr("Params: ...%-1s..., abc\n");
@@ -164,7 +165,12 @@ int	main()
 	ft_putstr("\n\n");
 	ft_putstr("Params: ...%.s...%-12s..., abcd, 1234567\n");
 	ft_printf("...%.s...%-12s...", "abcd", "1234567");
-	//ft_printf("Test %% flags %-+5d , %10s", 12, "oi");
+	*/
+	//Testing 'c'
+	ft_putstr("Testing 'c':\n");
+	ft_putstr("Params: ...%c...%c..., 97, a, b\n");
+	ft_printf("...%c...%c...%c...", 97, 'a', 'b');
+	ft_putstr("\n\n");
 	return (0);
 }
 

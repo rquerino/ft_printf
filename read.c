@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 10:47:19 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 14:38:05 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ int		ft_getafterdot(const char *str, t_flags *flags, int i, int n)
 	return (i - 1);
 }
 
+// Not needed: e, g
 int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 {
-	while (str[i] != 'd' && str[i] != 's' && str[i] != 'i') //c,d,e,f,g,i,o,s,u,x
+	while (str[i] != 'c' && str[i] != 'd' && str[i] != 'f' && str[i] != 'p'
+		&& str[i] != 'i' && str[i] != 'o' && str[i] != 's' && str[i] != 'u'
+		&& str[i] != 'x' && str[i] != 'X')
 	{
 		if (str[i] == '-')
 			flags[n].justify = 1;
@@ -111,6 +114,7 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 		{
 			ft_startstruct(flags, n);
 			i = ft_checkflags(str, flags, i, n); // Store every flag on that variable
+			//ft_printflags(flags[n]);
 			ft_printer(args, flags, n); // Print that variable according to the flags
 			n += 1;
 		}
@@ -118,5 +122,4 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 			ft_putchar(str[i]);
 		i++;
 	}
-	//ft_printflags(flags[n]);
 }
