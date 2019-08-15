@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/12 22:16:00 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 10:47:19 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,23 @@
 /*
 ** These functions will read the string and and store information
 ** about the flags of each variable.
-*/
 
-int	ft_getwidth(const char *str, t_flags *flags, int i, int n)
+char	*ft_gettype(char c)
+{
+	//c,d,e,f,g,i,o,s,u,x
+	if (c == 'c' || c == 'd' || c == 'i' || c == 'o' || c == 'x' ||
+		c == 'u')
+		return ("int");
+	else if (c == 'f' || c == 'e' || c == 'g')
+		return ("double");
+	else if (c == 's')
+		return ("char *");
+	else if  (c == 'p')
+		return ("void *");
+	return ("error");
+}
+*/
+int		ft_getwidth(const char *str, t_flags *flags, int i, int n)
 {
 	int	width;
 
@@ -32,7 +46,7 @@ int	ft_getwidth(const char *str, t_flags *flags, int i, int n)
 	return (i - 1);
 }
 
-int	ft_getafterdot(const char *str, t_flags *flags, int i, int n)
+int		ft_getafterdot(const char *str, t_flags *flags, int i, int n)
 {
 	int afterdot;
 	int	justdot;
@@ -51,11 +65,8 @@ int	ft_getafterdot(const char *str, t_flags *flags, int i, int n)
 	return (i - 1);
 }
 
-int	ft_checkflags(const char *str, t_flags *flags, int i, int n)
+int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 {
-	int	founddot;
-
-	founddot = 0;
 	while (str[i] != 'd' && str[i] != 's' && str[i] != 'i') //c,d,e,f,g,i,o,s,u,x
 	{
 		if (str[i] == '-')
@@ -72,20 +83,17 @@ int	ft_checkflags(const char *str, t_flags *flags, int i, int n)
 			flags[n].dollar = 1;
 		else if (str[i] == '#')
 			flags[n].hashtag = 1;
-		else if (str[i] > '0' && str[i] <= '9' && founddot == 0)
+		else if (str[i] > '0' && str[i] <= '9' && flags[n].afterdot == 0)
 			i = ft_getwidth(str, flags, i, n);
 		else if (str[i] == '.')
-		{
 			i = ft_getafterdot(str, flags, i, n);
-			founddot = 1;
-		}
 		i++;
 	}
 	flags[n].type = str[i];
 	return (i);
 }
 
-void    ft_reader(const char *str, t_flags *flags)
+void    ft_reader(const char *str, va_list args, t_flags *flags)
 {
 	int n;
 	int i;
@@ -103,11 +111,12 @@ void    ft_reader(const char *str, t_flags *flags)
 		{
 			ft_startstruct(flags, n);
 			i = ft_checkflags(str, flags, i, n); // Store every flag on that variable
-			//ft_printvariable(flags, n); // Print that variable according to the flags
+			ft_printer(args, flags, n); // Print that variable according to the flags
 			n += 1;
 		}
 		else
 			ft_putchar(str[i]);
 		i++;
 	}
+	//ft_printflags(flags[n]);
 }

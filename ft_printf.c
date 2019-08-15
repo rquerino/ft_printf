@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/12 22:15:05 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 11:06:43 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,48 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-
 /*
-** Simple function to print a char.
+** Error management:
+** 1: Insuficient arguments;
+** 2: Argument doesn't match flag;
+** 3: Invalid flag;
 */
 
-void	ft_putchar(char c)
+void	ft_printerror(int error)
 {
-	write(1, &c, 1);
+	if (error == 1)
+	{
+
+	}
+	else if (error == 2)
+	{
+
+	}
+	else if (error == 3)
+	{
+		
+	}
 }
 
 /*
 ** Print flags to check if it's Ok.
 */
 
-void	ft_printflags(t_flags *flags)
+void	ft_printflags(t_flags flags)
 {
-	int x;
-
-	x = 0;
-	while (x <= 1)
-	{
-		printf("Variable %d\n", x);
-		printf("Type: %c\n", flags[x].type);
-		printf("Hashtag: %d\n", flags[x].hashtag);
-		printf("Zero: %d\n", flags[x].zero);
-		printf("Justdot: %d\n", flags[x].justdot);
-		printf("Afterdot: %d\n", flags[x].afterdot);
-		printf("Justify: %d\n", flags[x].justify);
-		printf("Plus: %d\n", flags[x].plus);
-		printf("Hidden plus: %d\n", flags[x].hiddenplus);
-		printf("Width: %d\n", flags[x].width);
-		printf("Star: %d\n", flags[x].star);
-		printf("Dollar: %d\n", flags[x].dollar);
-		ft_putchar('\n');
-		x++;
-	}
+	ft_putchar('\n');
+	printf("Type: %c\n", flags.type);
+	printf("Hashtag: %d\n", flags.hashtag);
+	printf("Zero: %d\n", flags.zero);
+	printf("Justdot: %d\n", flags.justdot);
+	printf("Afterdot: %d\n", flags.afterdot);
+	printf("Justify: %d\n", flags.justify);
+	printf("Plus: %d\n", flags.plus);
+	printf("Hidden plus: %d\n", flags.hiddenplus);
+	printf("Width: %d\n", flags.width);
+	printf("Star: %d\n", flags.star);
+	printf("Dollar: %d\n", flags.dollar);
+	ft_putchar('\n');
 }
 
 /*
@@ -73,6 +79,35 @@ void	ft_startstruct(t_flags *flags, int n)
 }
 
 /*
+** Counts how many arguments were passed after the string.
+*/
+
+int		ft_countargs(const char *str)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while(str[i])
+	{
+		if (str[i] == '%' && str[i + 1] == '%')
+			i++;
+		if (str[i] == '%' && str[i + 1] != '%')
+		{
+			while (str[i] != 'c' && str[i] != 'd' && str[i] != 'e' &&
+				str[i] != 'f' && str[i] != 'g' && str[i] != 'i' &&
+				str[i] != 'o' && str[i] != 's' && str[i] != 'u' &&
+				str[i] != 'x')
+				i++;
+			n += 1;
+		}
+		i++;
+	}
+	return (n);
+}
+
+/*
 ** Variadic Function: a function that accepts a variable number of arguments.
 ** printf exists 0 on success, and >0 if an error occurs.
 */
@@ -82,14 +117,18 @@ int	ft_printf(const char *str, ...)
 	va_list args;
 	//int		ret;
 	t_flags *flags;
+	int		n_args;
+	/*int		i;
+	double	d;
+	char	*s;*/
 
-	flags = NULL;
-	flags = malloc(sizeof(flags) * 2);
+	n_args = ft_countargs(str);
+	//flags = NULL;
+	flags = malloc(sizeof(t_flags) * n_args);
 	va_start(args, str);
 	//ret = ft_doprintf(str, args);
-	ft_reader(str, flags);
+	ft_reader(str, args, flags);
 	ft_putchar('\n');
-	ft_printflags(flags);
 	va_end(args);
 	return (1);
 	//return (ret);
@@ -97,7 +136,35 @@ int	ft_printf(const char *str, ...)
 
 int	main()
 {
-	ft_printf("Test %% flags %-+5.d , %10s");
+	//Testing 's'
+	ft_putstr("Testing 's':\n");
+	ft_putstr("Params: ...%-1s..., abc\n");
+	ft_printf("...%-1s...", "abc");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%-3s..., ab\n");
+	ft_printf("...%-3s...", "ab");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%-10s..., abcde\n");
+	ft_printf("...%-10s...", "abcde");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%5s..., abc\n");
+	ft_printf("...%5s...", "abc");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%5.2s..., abcd\n");
+	ft_printf("...%5.2s...", "abcd");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%5.s..., abcd\n");
+	ft_printf("...%5.s...", "abcd");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%-2.s..., abcd\n");
+	ft_printf("...%-2.s...", "abcd");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%-2.s...%4.1s..., abc, def\n");
+	ft_printf("...%-2.s...%4.1s...", "abcd", "def");
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%.s...%-12s..., abcd, 1234567\n");
+	ft_printf("...%.s...%-12s...", "abcd", "1234567");
+	//ft_printf("Test %% flags %-+5d , %10s", 12, "oi");
 	return (0);
 }
 
