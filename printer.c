@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 10:10:01 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 11:03:47 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 14:01:26 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ char    *ft_readflags(t_flags flags, int arg_len, va_list args, int n)
 
 void    ft_printer(va_list args, t_flags *flags, int n)
 {	
-	//if (flags[n].printas == 's')
-	ft_printf_s(args, flags[n]);
+	if (flags[n].type == 's')
+		ft_printf_s(args, flags[n]);
+	else if (flags[n].type == 'c')
+		ft_printf_c(args);
 	
 	//c,d,e,f,g,i,o,s,u,x
 	/*

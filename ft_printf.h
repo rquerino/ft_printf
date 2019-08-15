@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 09:58:45 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 14:01:14 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,14 @@ void	ft_printer(va_list args, t_flags *flags, int n);
 ** Functions for type 's'
 */
 //char	*ft_printf_s(va_list args, t_flags *flags, int n);
-void	ft_printf_s(va_list args, t_flags flags);
+int		ft_printf_s(va_list args, t_flags flags);
 void	ft_checkwidth_s(t_flags flags, char *res, int len);
 void	ft_checkjwidth_s(t_flags flags, char *res);
 char	*ft_checkdot_s(t_flags flags, char *var);//, int len);
+
+/*
+** Functions for type 'c'
+*/
+int		ft_printf_c(va_list args);
 
 #endif
