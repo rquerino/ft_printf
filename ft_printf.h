@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 14:01:14 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 22:49:45 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,9 @@ char	*ft_checkdot_s(t_flags flags, char *var);//, int len);
 */
 int		ft_printf_c(va_list args);
 
+/*
+** Functions for type 'p'
+*/
+
+int		ft_print_p(va_list args);
 #endif

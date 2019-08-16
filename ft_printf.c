@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 14:18:34 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/15 23:13:04 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,18 @@ int	main()
 	ft_printf("...%.s...%-12s...", "abcd", "1234567");
 	*/
 	//Testing 'c'
+	/*
 	ft_putstr("Testing 'c':\n");
 	ft_putstr("Params: ...%c...%c..., 97, a, b\n");
 	ft_printf("...%c...%c...%c...", 97, 'a', 'b');
+	ft_putstr("\n\n");
+	*/
+	//Testing 'p'
+	int *a = NULL;
+
+	ft_putstr("Testing 'p':\n");
+	ft_putstr("Params: ...%p..., int *a\n");
+	ft_printf("...%p...", a);
 	ft_putstr("\n\n");
 	return (0);
 }
