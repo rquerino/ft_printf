@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 10:10:01 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 14:01:26 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:21:59 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void    ft_printer(va_list args, t_flags *flags, int n)
 		ft_printf_s(args, flags[n]);
 	else if (flags[n].type == 'c')
 		ft_printf_c(args);
+	else if	(flags[n].type == 'p')
+		ft_printf_p(args);
 	
 	//c,d,e,f,g,i,o,s,u,x
 	/*
