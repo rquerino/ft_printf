@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 22:49:45 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:22:52 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ int		ft_printf_c(va_list args);
 ** Functions for type 'p'
 */
 
-int		ft_print_p(va_list args);
+int		ft_printf_p(va_list args);
 #endif
