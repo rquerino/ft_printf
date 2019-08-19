@@ -6,16 +6,18 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 22:50:11 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/16 15:37:14 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/19 11:17:38 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-const char			*g_chars = "0123456789ABCDEF";
+/*
+** Function that returns the size of a number
+** based on its base.
+*/
 
-
-int		ft_len_base(unsigned long long n, int base)
+int		ft_blen(unsigned long long n, int base)
 {
 	int	i;
 
@@ -25,18 +27,26 @@ int		ft_len_base(unsigned long long n, int base)
 	return (i);
 }
 
-char				*ft_ulltoa_base(unsigned long long n, int base)
-{
-	char	*res;
-	int		len;
-	int		i;
+/*
+** Returns the number converted on base (until 16).
+** All letters are uppercase.
+*/
 
-	len = ft_len_base(n, base);
-	RETURN_VAL_IF_FAIL(NULL, (res = ft_strnew(len)));
+char	*ft_transform_base(unsigned long long n, int base)
+{
+	char		*res;
+	int			len;
+	int			i;
+	const char	*b16 = "0123456789ABCDEF";
+
+	len = ft_blen(n, base);
+	res = ft_strnew(len);
+	if (!res)
+		return (NULL);
 	i = len;
 	while (--i >= 0)
 	{
-		res[i] = g_chars[n % base];
+		res[i] = b16[n % base];
 		n /= base;
 	}
 	return (res);
@@ -45,19 +55,13 @@ char				*ft_ulltoa_base(unsigned long long n, int base)
 
 // store 16-bit address, and then pretend that memory is a character array
 
-int	ft_printf_p(va_list args)
+int		ft_printf_p(va_list args)
 {
 	unsigned long int	var;
-	unsigned char	tmp;
-	char			string[] = "0123456789ABCDEF";
+	char				*res;
 	
 	var = (unsigned long int)va_arg(args, void *);
-	tmp = *(1 + (unsigned char*) &var);
-	ft_putstr("0x");
-	ft_putchar( string[tmp >> 4] );
-	ft_putchar( string[tmp & 0xF] );
-	tmp = *(0 + (unsigned char*) &var);
-	ft_putchar( string[tmp >> 4] );
-	ft_putchar( string[tmp & 0xF] );
+	res = ft_strcat("0x", ft_transform_base(var, 16));
+	ft_putstr(res);
 	return (0);
 }

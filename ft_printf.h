@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/16 12:22:52 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/19 11:12:17 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,7 @@ int		ft_printf_c(va_list args);
 */
 
 int		ft_printf_p(va_list args);
+char	*ft_transform_base(unsigned long long n, int base);
+int		ft_blen(unsigned long long n, int base);
+
 #endif
