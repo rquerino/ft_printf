@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/16 14:15:58 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:32:30 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		ft_countargs(const char *str)
 			while (str[i] != 'c' && str[i] != 'd' && str[i] != 'e' &&
 				str[i] != 'f' && str[i] != 'g' && str[i] != 'i' &&
 				str[i] != 'o' && str[i] != 's' && str[i] != 'u' &&
-				str[i] != 'x')
+				str[i] != 'x' && str[i] != 'p')
 				i++;
 			n += 1;
 		}
@@ -174,14 +174,23 @@ int	main()
 	ft_putstr("\n\n");
 	*/
 	//Testing 'p'
-	int	x = 10;
+	/*int	x = 10;
 	int *a = &x;
 
 	ft_putstr("Testing 'p':\n");
 	ft_putstr("Params: ...%p..., int *a\n");
 	ft_printf("...%p...", a);
 	ft_putstr("\n\n");
-	printf("...%p...", a);
+	printf("...%p...", a);*/
+
+	//Testing 'd' and 'i'
+	ft_putstr("Testing 'd' and 'i':\n");
+	ft_putstr("Params: ...%-10d...%-+5i..., -500, 125\n");
+	ft_printf("....%-10d...%-+5i...", -500, 125);
+	ft_putstr("\n\n");
+	ft_putstr("...%04d...%- 03i, 10, 2\n");
+	ft_printf("...%04d...%- 03i", 10, 2);
+	ft_putstr("\n\n");
 	return (0);
 }
 
