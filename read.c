@@ -78,7 +78,7 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 			flags[n].plus = 1;
 		else if (str[i] == ' ')
 			flags[n].hiddenplus = 1;
-		else if (str[i] == '0' && str[i - 1] <= '0' && str[i - 1] >= '9')
+		else if (str[i] == '0')
 			flags[n].zero = 1;
 		else if (str[i] == '*')
 			flags[n].star = 1;
@@ -117,6 +117,7 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 			//ft_printflags(flags[n]);
 			ft_printer(args, flags, n); // Print that variable according to the flags
 			n += 1;
+			//ft_printflags(flags[n]);
 		}
 		else
 			ft_putchar(str[i]);

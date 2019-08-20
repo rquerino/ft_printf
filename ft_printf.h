@@ -56,6 +56,7 @@ void	ft_printer(va_list args, t_flags *flags, int n);
 /*
 ** Functions for type 's'
 */
+
 //char	*ft_printf_s(va_list args, t_flags *flags, int n);
 int		ft_printf_s(va_list args, t_flags flags);
 void	ft_checkwidth_s(t_flags flags, char *res, int len);
@@ -65,6 +66,7 @@ char	*ft_checkdot_s(t_flags flags, char *var);//, int len);
 /*
 ** Functions for type 'c'
 */
+
 int		ft_printf_c(va_list args);
 
 /*
@@ -74,5 +76,15 @@ int		ft_printf_c(va_list args);
 int		ft_printf_p(va_list args);
 char	*ft_transform_base(unsigned long long n, int base);
 int		ft_blen(unsigned long long n, int base);
+
+/*
+** Functions for type 'd' and 'i'
+*/
+
+int		ft_printf_di(va_list args, t_flags flags);
+void	ft_width_di(t_flags flags, int var, int len);
+void	ft_nowidth_di(t_flags flags, int var);
+void	ft_fillwidth(t_flags flags, int len);
+int		ft_intlen(int num);
 
 #endif

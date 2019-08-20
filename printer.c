@@ -46,7 +46,8 @@ void    ft_printer(va_list args, t_flags *flags, int n)
 		ft_printf_c(args);
 	else if	(flags[n].type == 'p')
 		ft_printf_p(args);
-	
+	else if	(flags[n].type == 'd' || flags[n].type == 'i')
+		ft_printf_di(args, flags[n]);
 	//c,d,e,f,g,i,o,s,u,x
 	/*
 	if (flags[n].printas == 'c')

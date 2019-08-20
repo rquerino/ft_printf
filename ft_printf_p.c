@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 22:50:11 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/19 11:17:38 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:32:35 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,17 @@ int		ft_printf_p(va_list args)
 {
 	unsigned long int	var;
 	char				*res;
-	
+	int					i;
+
+	i = 0;
 	var = (unsigned long int)va_arg(args, void *);
-	res = ft_strcat("0x", ft_transform_base(var, 16));
-	ft_putstr(res);
+	//res = ft_strcat("0x", ft_transform_base(var, 16));
+	ft_putstr("0x");
+	res = ft_transform_base(var, 16);
+	while (res[i])
+	{
+		ft_putchar(ft_tolower(res[i]));
+		i++;
+	}
 	return (0);
 }
