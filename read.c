@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/15 14:38:05 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/20 21:12:27 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,33 @@ char	*ft_gettype(char c)
 	return ("error");
 }
 */
+
+
+int		ft_getlength(const char *str, t_flags flags, int i)
+{
+	if (str[i] == 'l')
+	{
+		if (str[i + 1] == 'l')
+		{
+			flags.ll = 1;
+			return (i + 1);
+		}
+		flags.l = 1;
+	}
+	else if (str[i] == 'h')
+	{
+		if (str[i + 1] == 'h')
+		{
+			flags.hh = 1;
+			return (i + 1);
+		}
+		flags.h = 1;
+	}
+	else if (str[i] == 'L')
+		flags.L = 1;
+	return (i);
+}
+
 int		ft_getwidth(const char *str, t_flags *flags, int i, int n)
 {
 	int	width;
@@ -80,10 +107,8 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 			flags[n].hiddenplus = 1;
 		else if (str[i] == '0')
 			flags[n].zero = 1;
-		else if (str[i] == '*')
-			flags[n].star = 1;
-		else if (str[i] == '$')
-			flags[n].dollar = 1;
+		else if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L')
+			i = ft_getlength(str, flags[n], i);
 		else if (str[i] == '#')
 			flags[n].hashtag = 1;
 		else if (str[i] > '0' && str[i] <= '9' && flags[n].afterdot == 0)

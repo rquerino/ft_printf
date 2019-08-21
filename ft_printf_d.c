@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:55 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/19 12:49:21 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/20 22:20:10 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 ** Flags expected: -, +,  , width, h, hh, l, L.
 */
 
+
+// CREATE ft_ltoa, ft_lltoa ON LIBFT!!!!!!!!!!
 int		ft_intlen(int num)
 {
 	int	i;
@@ -78,10 +80,19 @@ void	ft_width_di(t_flags flags, int var, int len)
 
 int		ft_printf_di(va_list args, t_flags flags)
 {
-	int		var;
 	int		len;
+    char    *var;
 
+    if (flags.h == 1)
+        var = ft_itoa((short)va_arg(args, int));
+    else if (flags.hh == 1)
+        var = ft_itoa((char)va_arg(args, int));
+    else if (flags.l == 1) 
+        var = ft_lltoa(va_arg(args, long));
+    else if (flags.ll == 1)
+        var = ft_lltoa(va_arg(args, long long));
 	var = va_arg(args, int);
+    tmp = ft_checklenflags_di(flags, var);
 	len = ft_intlen(var);
 	len += len < 0 || (len >= 0 && (flags.plus == 1 || flags.hiddenplus == 1)) ? 1 : 0;
 	if (flags.width <= len)
