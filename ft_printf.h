@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/19 11:12:17 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/20 21:15:57 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
+# define	FL_h = 32
+# define	FL_hh = 64
+# define	FL_l = 128
+# define	FL_ll = 256
+# define	FL_L = 512
 /*
 ** Most of this flags are 1 if present, 0 if not.
 ** Except fl_width and fl_afterdot, they receive the number used.
@@ -33,8 +38,11 @@ typedef struct  s_flags
 	int		plus;
 	int		hiddenplus;
 	int		width;
-	int		star;
-	int		dollar;
+	int		h;
+	int		hh;
+	int		l;
+	int		ll;
+	int		L;
 }               t_flags;
 
 
@@ -46,6 +54,7 @@ int		ft_countargs(const char *str);
 void	ft_printflags(t_flags flags);
 int		ft_getwidth(const char *str, t_flags *flags, int i, int n);
 int		ft_getafterdot(const char *str, t_flags *flags, int i, int n);
+int		ft_getlength(const char *str, t_flags flags, int i);
 int		ft_checkflags(const char *str, t_flags *flags, int i, int n);
 void	ft_reader(const char *str, va_list args, t_flags *flags);
 void	ft_startstruct(t_flags *flags, int n);

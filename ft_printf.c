@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/19 12:32:30 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/20 21:05:14 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ void	ft_printflags(t_flags flags)
 	printf("Plus: %d\n", flags.plus);
 	printf("Hidden plus: %d\n", flags.hiddenplus);
 	printf("Width: %d\n", flags.width);
-	printf("Star: %d\n", flags.star);
-	printf("Dollar: %d\n", flags.dollar);
+	printf("h: %d\n", flags.h);
+	printf("hh: %d\n", flags.hh);
+	printf("l: %d\n", flags.l);
+	printf("ll: %d\n", flags.ll);
+	printf("L: %d\n", flags.L);
 	ft_putchar('\n');
 }
 
@@ -67,15 +70,18 @@ void	ft_startstruct(t_flags *flags, int n)
 	flags[n].type = 'a';
 	flags[n].justdot = 0;
 	flags[n].afterdot = 0;
-	flags[n].dollar = 0;
 	flags[n].hashtag = 0;
 	flags[n].hiddenplus = 0;
 	flags[n].justify = 0;
 	flags[n].plus = 0;
-	flags[n].star = 0;
 	flags[n].type = 0;
 	flags[n].width = 0;
 	flags[n].zero = 0;
+	flags[n].h = 0;
+	flags[n].hh = 0;
+	flags[n].l = 0;
+	flags[n].ll = 0;
+	flags[n].L = 0;
 }
 
 /*
