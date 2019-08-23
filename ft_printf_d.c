@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:55 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/21 12:52:09 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/23 10:32:48 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_width_di(t_flags flags, char *var, int len)
 	{
 		if (var[0] != '-' && flags.plus == 1)
 			ft_putchar('+');
-		else if (var >= 0 && flags.hiddenplus == 1)
+		else if (var[0] != '-' && flags.hiddenplus == 1)
 			ft_putchar(' ');
 		else if (var[0] == '-')
 		{
@@ -60,7 +60,10 @@ void	ft_width_di(t_flags flags, char *var, int len)
 			isneg = 1;
 		}
 		ft_fillwidth(flags, flags.width - len);
-		ft_putstr(var + 1);
+		if (var[0] == '-')
+			ft_putstr(var + 1);
+		else
+			ft_putstr(var);
 	}
 	else
 	{
@@ -72,7 +75,6 @@ void	ft_width_di(t_flags flags, char *var, int len)
 		else
 			ft_putstr(var);
 	}
-	
 }
 
 /*
@@ -101,6 +103,6 @@ int		ft_printf_di(va_list args, t_flags flags)
 		ft_nowidth_di(flags, var);
 	else
 		ft_width_di(flags, var, len);
-	ft_strdel(var);
+	ft_strdel(&var);
 	return (0);
 }

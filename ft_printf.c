@@ -6,13 +6,15 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/21 12:53:14 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/23 11:57:23 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 #include <stdarg.h>
+
+//gcc -Wall -Wextra -Werror ft_printf.c read.c printer.c ft_printf_d.c ft_printf_s.c ft_printf_c.c ft_printf_p.c aux.c libft/libft.a
 
 /*
 ** Error management:
@@ -194,8 +196,17 @@ int	main()
 	ft_putstr("Params: ...%-10d...%-+5i..., -500, 125\n");
 	ft_printf("....%-10d...%-+5i...", -500, 125);
 	ft_putstr("\n\n");
-	ft_putstr("...%04d...%- 03i, 10, 2\n");
+	ft_putstr("Params: ...%04d...%- 03i, 10, 2\n");
 	ft_printf("...%04d...%- 03i", 10, 2);
+	ft_putstr("\n\n");
+	// flags h, hh, l, ll
+	ft_putstr("Params: ...%04hd...%- 03hhi, -134508324, 28920928103\n");
+	ft_printf("ft_printf: ...%04hd...%- 03hhi", -134508324, 28920928103);
+	//printf("   printf: ...%04hd...%- 03hhi", 1345, 2892);
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%ld...%- 010lli, 9128090182, -29384220912\n");
+	ft_printf("ft_printf: ...%ld...%- 010lli", 9128090182, -29384220912);
+	//printf("   printf: ...%ld...%- 010lli", 91280, 293842);
 	ft_putstr("\n\n");
 	return (0);
 }
