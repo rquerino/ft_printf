@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:33:02 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/21 12:51:59 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/23 10:23:15 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char    *ft_ltoa(long long n)
 	len = ft_ulllen(n);
 	len += n < 0 ? 1 : 0;
 	nbr = n < 0 ? -n : n;
-	if (res != ft_strnew(len))
+	res = ft_strnew(len);
+	if (!res)
 		return (NULL);
 	while (--len >= 0 + (n < 0))
 	{
