@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/21 12:51:37 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/25 15:27:47 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int		ft_getlen(va_list args, int n);
 char	*ft_readflags(t_flags flags, int arg_len, va_list args, int n);
 void	ft_printer(va_list args, t_flags *flags, int n);
 char	*ft_ltoa(long long n);
-size_t	ft_ulllen(unsigned long long n);
+size_t	ft_ulllen_base(unsigned long long n, int base);
 size_t	ft_ilen(int n);
+char	*ft_utoa8(unsigned n);
+char	*ft_ulltoa8(unsigned long long n);
 
 /*
 ** Functions for type 's'
@@ -97,5 +99,11 @@ int		ft_printf_di(va_list args, t_flags flags);
 void	ft_width_di(t_flags flags, char *var, int len);
 void	ft_nowidth_di(t_flags flags, char *var);
 void	ft_fillwidth(t_flags flags, int len);
+
+/*
+** Functions for type 'o'
+*/
+
+int		ft_printf_o(va_list args, t_flags flags);
 
 #endif

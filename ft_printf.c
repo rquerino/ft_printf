@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/23 11:57:23 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/25 16:28:52 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 #include <stdarg.h>
 
 //gcc -Wall -Wextra -Werror ft_printf.c read.c printer.c ft_printf_d.c ft_printf_s.c ft_printf_c.c ft_printf_p.c aux.c libft/libft.a
+
+
+/*
+Stuff to handle:
+
+Basic flag errors: 
+'-' makes '0' useless. Need to advise the user
+'+' and ' ' are undefined behavior to %o
+'0' is ignored when there is a '-' flag (at least with %o, need to test with others)
+
+
+*/
+
 
 /*
 ** Error management:
@@ -190,7 +203,7 @@ int	main()
 	ft_printf("...%p...", a);
 	ft_putstr("\n\n");
 	printf("...%p...", a);*/
-
+	/*
 	//Testing 'd' and 'i'
 	ft_putstr("Testing 'd' and 'i':\n");
 	ft_putstr("Params: ...%-10d...%-+5i..., -500, 125\n");
@@ -208,5 +221,23 @@ int	main()
 	ft_printf("ft_printf: ...%ld...%- 010lli", 9128090182, -29384220912);
 	//printf("   printf: ...%ld...%- 010lli", 91280, 293842);
 	ft_putstr("\n\n");
+	*/
+	/*
+	//Testing 'o'
+	ft_putstr("Testing 'o':\n");
+	ft_putstr("Params: ...%-10o...%4o..., -500, 125\n");
+	ft_printf("ft_printf: ....%-10o...%4o...", -500, 125);
+	ft_putchar('\n');
+	printf("printf:    ....%-10o...%4o...", -500, 125);
+	ft_putstr("\n\n");
+	ft_putstr("Params: ...%04o...%- 3o, 100, 20\n");
+	ft_printf("ft_printf: ...%04o...%-3o", 100, 20);
+	ft_putchar('\n');
+	printf("printf:    ...%04o...%-3o", 100, 20);
+	ft_putstr("\n\n");
+	// flags h, hh, l, ll
+	ft_putstr("Params: ...%04ho...%-3hho, -134508324, 28920928103\n");
+	ft_printf("ft_printf: ...%04ho...%-3hho", -134508324, 28920928103);
+	*/
 	return (0);
 }
