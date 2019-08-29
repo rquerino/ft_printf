@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:33:02 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/25 15:34:02 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/28 20:47:56 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,42 +55,42 @@ char    *ft_ltoa(long long n)
 	return (res);
 }
 
-char	*ft_utoa8(unsigned n)
+char	*ft_utoa_base(unsigned n, int base)
 {
 	char	*res;
 	int		len;
-	const char	*b8 = "01234567";
+	const char	*b10 = "0123456789";
 
-	len = ft_ulllen_base(n, 8);
+	len = ft_ulllen_base(n, base);
 	len += n < 0 ? 1 : 0;
 	res = ft_strnew(len);
 	if (!res)
 		return (NULL);
 	while (--len >= 0 + (n < 0))
 	{
-		res[len] = b8[n % 8];
-		n /= 8;
+		res[len] = b10[n % base];
+		n /= base;
 	}
 	if (n < 0)
 		res[0] = '-';
 	return (res);
 }
 
-char	*ft_ulltoa8(unsigned long long n)
+char	*ft_ulltoa_base(unsigned long long n, int base)
 {
 	char	*res;
 	int		len;
-	const char	*b8 = "01234567";
+	const char	*b10 = "0123456789";
 
-	len = ft_ulllen_base(n, 8);
+	len = ft_ulllen_base(n, base);
 	len += n < 0 ? 1 : 0;
 	res = ft_strnew(len);
 	if (!res)
 		return (NULL);
 	while (--len >= 0 + (n < 0))
 	{
-		res[len] = b8[n % 8];
-		n /= 8;
+		res[len] = b10[n % base];
+		n /= base;
 	}
 	if (n < 0)
 		res[0] = '-';
