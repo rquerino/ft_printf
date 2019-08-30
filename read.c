@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/29 15:12:07 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/30 11:44:32 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 			i = ft_getlength(str, flags[n], i);
 		else if (str[i] == '#')
 			flags[n].hashtag = 1;
-		else if (str[i] > '0' && str[i] <= '9' && flags[n].afterdot == 0)
+		else if (str[i] > '0' 00&& str[i] <= '9' && flags[n].afterdot == 0)
 			i = ft_getwidth(str, flags, i, n);
 		else if (str[i] == '.')
 			i = ft_getafterdot(str, flags, i, n);
@@ -123,7 +123,7 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 
 int		ft_printslash(char *str, int i)
 {
-	if (str[i + 1] == '%' || str[i + 1] == '"' || str[i + 1] == '\')
+	if (str[i + 1] == '%' || str[i + 1] == '"' || str[i + 1] == '\ ')
 		ft_putchar(str[i + 1]);
 	else if (str[i + 1] == 'n')
 		ft_putchar('\n');
@@ -148,7 +148,7 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 			ft_putchar(str[i]);
 			i++;
 		}
-		else if (str[i] == '\')
+		else if (str[i] == '\ ')
 			i = ft_printslash(str, i);
 		else if (str[i] == '%' && str[i + 1] != '%')
 		{
