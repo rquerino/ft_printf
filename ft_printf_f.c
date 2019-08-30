@@ -1,44 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_x.c                                      :+:      :+:    :+:   */
+/*   ft_printf_f.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/28 21:22:26 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/29 12:42:11 by rquerino         ###   ########.fr       */
+/*   Created: 2019/08/29 13:45:15 by rquerino          #+#    #+#             */
+/*   Updated: 2019/08/29 17:21:46 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_makehexlower(char *var)
-{
-	int	i;
 
-	i = 0;
-	while (var[i])
-	{
-		ft_putchar(ft_tolower(var[i]));
-		i++;
-	}
+int		ft_flen(long double n)
+{
+
 }
 
-int		ft_printf_x(va_list args, t_flags flags)
+/*
+** Function to transform long double to string.
+** Divides the double in before dot and after dot.
+*/
+
+char	*ft_ldtoa(long double n)
+{
+	char	*res;
+	int		len;
+	int		i;
+
+	len = ft_flen(n);
+
+
+}
+
+
+
+int		ft_printf_f(va_list args, t_flags flags)
 {
 	int		len;
     char    *var;
 
-    if (flags.h == 1)
-        var = ft_utoa_base((unsigned short)va_arg(args, unsigned), 16);
-    else if (flags.hh == 1)
-        var = ft_utoa_base((unsigned char)va_arg(args, unsigned), 16);
-    else if (flags.l == 1)
-        var = ft_ulltoa_base(va_arg(args, unsigned long), 16);
-    else if (flags.ll == 1)
-        var = ft_ulltoa_base(va_arg(args, unsigned long long), 16);
+    if (flags.L == 1)
+        var = ft_ldtoa((va_arg(args, long double));
 	else
-		var = ft_utoa_base(va_arg(args, unsigned), 16);
+		var = ft_ldtoa(va_arg(args, double));
 	len = ft_strlen(var);
 	len += len >= 0 && (flags.plus == 1 || flags.hiddenplus == 1) ? 1 : 0;
 	if (flags.type == 'x')

@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/20 21:12:27 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:12:07 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,19 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 	return (i);
 }
 
+int		ft_printslash(char *str, int i)
+{
+	if (str[i + 1] == '%' || str[i + 1] == '"' || str[i + 1] == '\')
+		ft_putchar(str[i + 1]);
+	else if (str[i + 1] == 'n')
+		ft_putchar('\n');
+	else if (str[i + 1] == 't')
+		ft_putchar('\t');
+	else if (str[i + 1] == 'v')
+		ft_putchar('\v');
+	return (i + 1);
+}
+
 void    ft_reader(const char *str, va_list args, t_flags *flags)
 {
 	int n;
@@ -135,6 +148,8 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 			ft_putchar(str[i]);
 			i++;
 		}
+		else if (str[i] == '\')
+			i = ft_printslash(str, i);
 		else if (str[i] == '%' && str[i + 1] != '%')
 		{
 			ft_startstruct(flags, n);
