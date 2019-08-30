@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/28 21:23:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/08/29 14:06:28 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,13 @@ int		ft_printf_u(va_list args, t_flags flags);
 */
 
 int		ft_printf_x(va_list args, t_flags flags);
+void	ft_makehexlower(char *var);
+
+/*
+** Functions for type 'f'
+*/
+
+char	*ftoa(float n);
+int		ft_printf_f(va_list args, t_flags flags);
 
 #endif
