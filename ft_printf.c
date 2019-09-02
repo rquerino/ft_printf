@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/29 12:42:24 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/02 16:04:38 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-//gcc -Wall -Wextra -Werror ft_printf.c read.c printer.c ft_printf_d.c ft_printf_s.c ft_printf_c.c ft_printf_p.c aux.c libft/libft.a
-
+// gcc -Wall -Wextra -Werror ft_printf.c read.c printer.c ft_printf_d.c ft_printf_s.c ft_printf_c.c ft_printf_p.c aux.c ft_dtoa.c ft_printf_f.c ft_printf_o.c ft_printf_x.c ft_printf_u.c libft/libft.a
 
 /*
 Stuff to handle:
@@ -228,16 +227,24 @@ int	main()
 	ft_putstr("Params: ...%-10o...%4o..., -500, 125\n");
 	ft_printf("ft_printf: ....%-10o...%4o...", -500, 125);
 	ft_putchar('\n');
-	printf("printf:    ....%-10o...%4o...", -500, 125);
+	printf("printf:    ....%-10o...%4o...\n", -500, 125);
 	ft_putstr("\n\n");
 	ft_putstr("Params: ...%04o...%- 3o, 100, 20\n");
-	ft_printf("ft_printf: ...%04o...%-3o", 100, 20);
+	ft_printf("ft_printf: ...%04o...%-3o\n", 100, 20);
 	ft_putchar('\n');
 	printf("printf:    ...%04o...%-3o", 100, 20);
 	ft_putstr("\n\n");
 	// flags h, hh, l, ll
 	ft_putstr("Params: ...%04ho...%-3hho, -134508324, 28920928103\n");
-	ft_printf("ft_printf: ...%04ho...%-3hho", -134508324, 28920928103);
+	ft_printf("ft_printf: ...%04ho...%-3hho\n", -134508324, 28920928103);
 	*/
+	//Testing 'f'
+	ft_putstr("Testing 'f':\n");
+	ft_putstr("Params: ...%-10f...%4f..., -500.123, 125.44444\n");
+	ft_printf("ft_printf: ....%-10f...%4f...", -500.123, 125.44444);
+	ft_putchar('\n');
+	printf("printf:    ....%-10f...%4f...", -500.123, 125.44444);
+
+
 	return (0);
 }

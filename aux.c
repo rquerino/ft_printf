@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:33:02 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/29 11:46:04 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/02 15:44:53 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ char    *ft_ltoa(long long n)
 	const char			*b16 = "0123456789ABCDEF";
 
 	len = ft_ulllen_base(n, 10);
-	len += n < 0 ? 1 : 0;
-	nbr = n < 0 ? -n : n;
+	if (n < 0)
+	{
+		len += 1;
+		nbr = -n;
+	}
 	res = ft_strnew(len);
 	if (!res)
 		return (NULL);
@@ -62,17 +65,14 @@ char	*ft_utoa_base(unsigned n, int base)
 	const char	*b16 = "0123456789ABCDEF";
 
 	len = ft_ulllen_base(n, base);
-	len += n < 0 ? 1 : 0;
 	res = ft_strnew(len);
 	if (!res)
 		return (NULL);
-	while (--len >= 0 + (n < 0))
+	while (--len >= 0)
 	{
 		res[len] = b16[n % base];
 		n /= base;
 	}
-	if (n < 0)
-		res[0] = '-';
 	return (res);
 }
 
@@ -83,16 +83,13 @@ char	*ft_ulltoa_base(unsigned long long n, int base)
 	const char	*b16 = "0123456789ABCDEF";
 
 	len = ft_ulllen_base(n, base);
-	len += n < 0 ? 1 : 0;
 	res = ft_strnew(len);
 	if (!res)
 		return (NULL);
-	while (--len >= 0 + (n < 0))
+	while (--len >= 0)
 	{
 		res[len] = b16[n % base];
 		n /= base;
 	}
-	if (n < 0)
-		res[0] = '-';
 	return (res);
 }
