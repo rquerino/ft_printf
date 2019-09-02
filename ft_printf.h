@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/29 14:06:28 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/02 14:24:48 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ size_t	ft_ulllen_base(unsigned long long n, int base);
 size_t	ft_ilen(int n);
 char	*ft_utoa_base(unsigned n, int base);
 char	*ft_ulltoa_base(unsigned long long n, int base);
+char	*ft_beforedot(long double n);
+size_t	ft_afterdotlen(long double n);
+void	ft_dotafter(char *res, char *after);
+char	*ft_afterdot(long double n);
+char	*ft_ldtoa(long double n);
+char	*ft_dtoa(double n);
 
 /*
 ** Functions for type 's'
@@ -123,7 +129,8 @@ void	ft_makehexlower(char *var);
 ** Functions for type 'f'
 */
 
-char	*ftoa(float n);
 int		ft_printf_f(va_list args, t_flags flags);
+void	ft_nowidth_f(t_flags flags, char *var, int len);
+void	ft_width_f(t_flags flags, char *var, int len);
 
 #endif
