@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 13:45:15 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/02 15:36:05 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/03 22:30:02 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_width_f(t_flags flags, char *var, int len)
 		ft_nowidth_f(flags, var, len);
 		while ((flags.plus == 1 || flags.hiddenplus == 1) && var[0] != '-' ?
 			(1 + i++) <= (flags.width - len) : i++ <= (flags.width - len))
-			ft_putchar(' ');
+			ft_putchar('0');
 	}
 	else
 	{
