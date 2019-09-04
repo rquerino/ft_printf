@@ -6,55 +6,61 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 14:49:58 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/03 22:49:13 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:18:03 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "math.h"
+#include "stdio.h"
 
 /*
 ** Extract the integer part of the number.
 */
 
-char	*ft_beforedot(long double n)
+int		ft_checkround(int n, int precision)
 {
-	int		nbr;
+	char *check;
 
-	nbr = (int)n;
-	return (ft_itoa(nbr));
+	check = ft_itoa(n);
+	if (check[precision - 1] == '9' && check[precision - 2] == '9')
+	{
+		ft_strdel(&check);
+		return (1);
+	}
+	ft_strdel(&check);
+	return (0);
 }
 
 /*
 ** Returns the length of the number after dot.
 */
 
-size_t	ft_afterdotlen(long double n)
+int		ft_roundafter(long double n, int precision)
 {
-	int			len;
-	int			before;
+	int			aux;
 	long double	after;
+	int			i;
 
-	len = 0;
-	before = (int)n;
-	after = n - before;
+	i = 0;
+	aux = (int)n;
+	after = n - aux;
 	after *= after < 0 ? -1 : 1;
-	//ERROR HERE, FLOAT HAS MORE DECIMALS
-	while (after > 0.001)
+	while (i < precision)
 	{
 		after *= 10;
-		len++;
-		before = (int)after;
-		after = after - before;
+		i++;
 	}
-	return (len);
+	//printf("\n\ni: %i\n\n", i);
+	aux = (int)after;
+	after = after - aux;
+	return ((int)after * 10);
 }
 
 /*
 ** Returns ".0000" format.
 */
 
-void	ft_dotafter(char *res, char *after)
+void	ft_dotafter(char *res, char *after, int precision)
 {
 	int	i;
 	int	j;
@@ -68,51 +74,56 @@ void	ft_dotafter(char *res, char *after)
 		i++;
 		j++;
 	}
+	while (i < precision + 1)
+	{
+		res[i] = '0';
+		i++;
+	}
 }
 
 /*
 ** Extract the fraction part.
 */
 
-char	*ft_afterdot(long double n)
+char	*ft_afterdot(long double n, int precision)
 {
 	long double	after;
+	int			i;
 	int			aux;
-	int			aft_len;
 	char		*res;
 
+	i = 0;
 	aux = (int)n;
-	aft_len = ft_afterdotlen(n);
-	if (aft_len > 0)
+	after = n - aux;
+	after *= after < 0 ? -1 : 1;
+	res = ft_strnew(precision + 1);
+	while (i < precision)
 	{
-		after = n - (long double)aux;
-		aux = (int)after;
-		res = ft_strnew(aft_len + 1);
-		ft_dotafter(res, ft_itoa(aux));
-		return (res);
+		after *= 10;
+		i++;
 	}
-	else
-		return (NULL);
+	aux = (int)after;
+	//CONFERIR SE PRECISION >6 TRATA OS ARREDONDAMENTOS
+	if (ft_roundafter(n, precision) >= 5 || ft_checkround(aux, precision)) 
+		aux += 1;
+	ft_dotafter(res, ft_itoa(aux), precision);
+	return (res);
 }
 
-char	*ft_ldtoa(long double n)
+char	*ft_ldtoa(long double n, int precision)
 {
 	char	*before;
 	char	*after;
 	char	*res;
 
-	before = ft_beforedot(n);
-	after = ft_afterdot(n);
-	if (after)
-	{
-		res = ft_strcat(before, after);
-		return (res);
-	}
-	else
-		return (before);
+	before = ft_itoa((int)n);
+	after = ft_afterdot(n, precision);
+	res = ft_strcat(before, after);
+	//printf("\n\nres: %s\n\n", res);
+	return (res);
 }
 
-char	*ft_dtoa(double n)
+char	*ft_dtoa(double n, int precision)
 {
-	return (ft_ldtoa(n));
+	return (ft_ldtoa(n, precision));
 }
