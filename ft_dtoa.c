@@ -6,11 +6,12 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 14:49:58 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/02 12:48:59 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/03 22:49:13 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "math.h"
 
 /*
 ** Extract the integer part of the number.
@@ -36,13 +37,15 @@ size_t	ft_afterdotlen(long double n)
 
 	len = 0;
 	before = (int)n;
-	after = n - (long double)before;
-	while (after > 0)
+	after = n - before;
+	after *= after < 0 ? -1 : 1;
+	//ERROR HERE, FLOAT HAS MORE DECIMALS
+	while (after > 0.001)
 	{
-		n *= 10;
+		after *= 10;
 		len++;
 		before = (int)after;
-		after = after - (long double)before;
+		after = after - before;
 	}
 	return (len);
 }
