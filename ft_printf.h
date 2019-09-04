@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/02 14:24:48 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:16:55 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
-# define	FL_h = 32
-# define	FL_hh = 64
-# define	FL_l = 128
-# define	FL_ll = 256
-# define	FL_L = 512
 /*
 ** Most of this flags are 1 if present, 0 if not.
 ** Except fl_width and fl_afterdot, they receive the number used.
@@ -66,12 +61,12 @@ size_t	ft_ulllen_base(unsigned long long n, int base);
 size_t	ft_ilen(int n);
 char	*ft_utoa_base(unsigned n, int base);
 char	*ft_ulltoa_base(unsigned long long n, int base);
-char	*ft_beforedot(long double n);
-size_t	ft_afterdotlen(long double n);
-void	ft_dotafter(char *res, char *after);
-char	*ft_afterdot(long double n);
-char	*ft_ldtoa(long double n);
-char	*ft_dtoa(double n);
+int		ft_checkround(int n, int precision);
+int		ft_roundafter(long double n, int precision);
+void	ft_dotafter(char *res, char *after, int precision);
+char	*ft_afterdot(long double n, int precision);
+char	*ft_ldtoa(long double n, int precision);
+char	*ft_dtoa(double n, int precision);
 
 /*
 ** Functions for type 's'
@@ -111,6 +106,8 @@ void	ft_fillwidth(t_flags flags, int len);
 */
 
 int		ft_printf_o(va_list args, t_flags flags);
+char	*ft_hashtag_ox(t_flags flags, char *var, int len);
+
 
 /*
 ** Functions for type 'u'
@@ -130,7 +127,7 @@ void	ft_makehexlower(char *var);
 */
 
 int		ft_printf_f(va_list args, t_flags flags);
-void	ft_nowidth_f(t_flags flags, char *var, int len);
+void	ft_nowidth_f(t_flags flags, char *var);
 void	ft_width_f(t_flags flags, char *var, int len);
 
 #endif

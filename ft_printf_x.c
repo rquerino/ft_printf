@@ -6,11 +6,16 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 21:22:26 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/29 12:42:11 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:12:19 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** hashtag = 1 and number != 0, start with 0x ONLY!!!!!!!!
+** 
+*/
 
 void	ft_makehexlower(char *var)
 {
