@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 12:16:34 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:24:13 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	//ret = ft_doprintf(str, args);
 	ft_reader(str, args, flags);
-	ft_putchar('\n');
 	va_end(args);
 	return (1);
 	//return (ret);

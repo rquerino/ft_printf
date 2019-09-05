@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 10:10:01 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 14:06:18 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 16:23:20 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void    ft_printer(va_list args, t_flags *flags, int n)
 	else if (flags[n].type == 'c')
 		ft_printf_c(args, flags[n]);
 	else if	(flags[n].type == 'p')
-		ft_printf_p(args);
+		ft_printf_p(args, flags[n]);
 	else if	(flags[n].type == 'd' || flags[n].type == 'i')
 		ft_printf_di(args, flags[n]);
 	else if (flags[n].type == 'o')

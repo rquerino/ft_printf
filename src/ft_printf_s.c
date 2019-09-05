@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:50 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:55:13 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int		ft_printf_s(va_list args, t_flags flags)
 	char	*var;
 
 	var = va_arg(args, char*);
+	if (var == NULL)
+		var = ft_strdup("(null)");
 	if (flags.width == 0 && flags.justdot == 1)
 		return (0);
 	len = ft_strlen(var);
@@ -131,8 +133,9 @@ int		ft_printf_s(va_list args, t_flags flags)
 	}
 	else
 		ft_putstr(res);
-	return (0);
 	free(res);
+	free(var);
+	return (0);
 }
 /*
 char	*ft_printf_s(va_list args, t_flags *flags, int n)

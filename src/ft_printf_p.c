@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 22:50:11 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 16:48:49 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,47 @@ char	*ft_transform_base(unsigned long long n, int base)
 	return (res);
 }
 
-
-// store 16-bit address, and then pretend that memory is a character array
-
-int		ft_printf_p(va_list args)
+void	ft_printp(char *res)
 {
-	unsigned long int	var;
-	char				*res;
-	int					i;
+	int	i;
 
 	i = 0;
-	var = (unsigned long int)va_arg(args, void *);
-	//res = ft_strcat("0x", ft_transform_base(var, 16));
 	ft_putstr("0x");
-	res = ft_transform_base(var, 16);
 	while (res[i])
 	{
 		ft_putchar(ft_tolower(res[i]));
 		i++;
 	}
-	return (0);
+}
+
+// store 16-bit address, and then pretend that memory is a character array
+
+int		ft_printf_p(va_list args, t_flags flags)
+{
+	unsigned long int	var;
+	char				*res;
+	int					i;
+	int					len;
+
+	i = 0;
+	var = (unsigned long int)va_arg(args, void *);
+	res = ft_transform_base(var, 16);
+	len = ft_strlen(res);
+	len += 2;
+	if (flags.width <= len)
+		ft_printp(res);
+	if (flags.width > len)
+	{
+		if (flags.justify == 1)
+			ft_printp(res);
+		while (i < flags.width - len)
+		{
+			ft_putchar(' ');
+			i++;
+		}
+		if (flags.justify == 0)
+			ft_printp(res);
+	}
+	free(res);
+	return (flags.width > len ? flags.width : len);
 }
