@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/03 22:22:53 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 12:16:34 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,99 +152,4 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (1);
 	//return (ret);
-}
-
-int	main()
-{
-	/*
-	//Testing 's'
-	ft_putstr("Testing 's':\n");
-	ft_putstr("Params: ...%-1s..., abc\n");
-	ft_printf("...%-1s...", "abc");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%-3s..., ab\n");
-	ft_printf("...%-3s...", "ab");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%-10s..., abcde\n");
-	ft_printf("...%-10s...", "abcde");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%5s..., abc\n");
-	ft_printf("...%5s...", "abc");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%5.2s..., abcd\n");
-	ft_printf("...%5.2s...", "abcd");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%5.s..., abcd\n");
-	ft_printf("...%5.s...", "abcd");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%-2.s..., abcd\n");
-	ft_printf("...%-2.s...", "abcd");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%-2.s...%4.1s..., abc, def\n");
-	ft_printf("...%-2.s...%4.1s...", "abcd", "def");
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%.s...%-12s..., abcd, 1234567\n");
-	ft_printf("...%.s...%-12s...", "abcd", "1234567");
-	*/
-	//Testing 'c'
-	/*
-	ft_putstr("Testing 'c':\n");
-	ft_putstr("Params: ...%c...%c..., 97, a, b\n");
-	ft_printf("...%c...%c...%c...", 97, 'a', 'b');
-	ft_putstr("\n\n");
-	*/
-	//Testing 'p'
-	/*int	x = 10;
-	int *a = &x;
-
-	ft_putstr("Testing 'p':\n");
-	ft_putstr("Params: ...%p..., int *a\n");
-	ft_printf("...%p...", a);
-	ft_putstr("\n\n");
-	printf("...%p...", a);*/
-	/*
-	//Testing 'd' and 'i'
-	ft_putstr("Testing 'd' and 'i':\n");
-	ft_putstr("Params: ...%-10d...%-+5i..., -500, 125\n");
-	ft_printf("....%-10d...%-+5i...", -500, 125);
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%04d...%- 03i, 10, 2\n");
-	ft_printf("...%04d...%- 03i", 10, 2);
-	ft_putstr("\n\n");
-	// flags h, hh, l, ll
-	ft_putstr("Params: ...%04hd...%- 03hhi, -134508324, 28920928103\n");
-	ft_printf("ft_printf: ...%04hd...%- 03hhi", -134508324, 28920928103);
-	//printf("   printf: ...%04hd...%- 03hhi", 1345, 2892);
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%ld...%- 010lli, 9128090182, -29384220912\n");
-	ft_printf("ft_printf: ...%ld...%- 010lli", 9128090182, -29384220912);
-	//printf("   printf: ...%ld...%- 010lli", 91280, 293842);
-	ft_putstr("\n\n");
-	*/
-	/*
-	//Testing 'o'
-	ft_putstr("Testing 'o':\n");
-	ft_putstr("Params: ...%-10o...%4o..., -500, 125\n");
-	ft_printf("ft_printf: ....%-10o...%4o...", -500, 125);
-	ft_putchar('\n');
-	printf("printf:    ....%-10o...%4o...\n", -500, 125);
-	ft_putstr("\n\n");
-	ft_putstr("Params: ...%04o...%- 3o, 100, 20\n");
-	ft_printf("ft_printf: ...%04o...%-3o\n", 100, 20);
-	ft_putchar('\n');
-	printf("printf:    ...%04o...%-3o", 100, 20);
-	ft_putstr("\n\n");
-	// flags h, hh, l, ll
-	ft_putstr("Params: ...%04ho...%-3hho, -134508324, 28920928103\n");
-	ft_printf("ft_printf: ...%04ho...%-3hho\n", -134508324, 28920928103);
-	*/
-	//Testing 'f'
-	ft_putstr("Testing 'f':\n");
-	ft_putstr("Params: ...%-10f...%4.1f...%6.2f..., -500.123, 125.44444, 42.0\n");
-	ft_printf("ft_printf: ....%-10f...%4.1f...%6.2f...", -500.123, 125.44444, 42.0);
-	ft_putchar('\n');
-	printf("printf:    ....%-10f...%4.1f...%6.2f...", -500.123, 125.44444, 42.0);
-
-
-	return (0);
 }
