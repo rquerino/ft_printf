@@ -6,13 +6,13 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/04 16:36:04 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
+/*
 void	ft_nowidth_ox(t_flags flags, char *var)
 {
 	
@@ -24,7 +24,7 @@ void	ft_width_ox(t_flags flags, char *var, int len)
 	
 
 }
-
+*/
 
 /*
 ** Function to deal with 'o'.
@@ -79,10 +79,10 @@ int		ft_printf_o(va_list args, t_flags flags)
 	if (var && flags.hashtag == 1)
 		var = ft_hashtag_ox(flags, var, len);
 	len += len >= 0 && flags.hashtag == 1 ? 1 : 0;
-	if (flags.width <= len)
-		ft_nowidth_ox(flags, var);
-	else
-		ft_width_ox(flags, var, len);
+	//if (flags.width <= len)
+	//	ft_nowidth_ox(flags, var);
+	//else
+//		ft_width_ox(flags, var, len);
 	ft_strdel(&var);
 	return (0);
 }

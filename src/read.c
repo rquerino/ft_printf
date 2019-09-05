@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/02 15:33:40 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:40:08 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int		ft_printslash(const char *str, int i)
 		ft_putchar('\t');
 	else if (str[i + 1] == 'v')
 		ft_putchar('\v');
+	else if (str[i + 1] == 'r')
+		ft_putchar('\r');
 	return (i + 1);
 }
 
@@ -150,13 +152,16 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 		}
 		else if (str[i] == '\\')
 			i = ft_printslash(str, i);
-		else if (str[i] == '%' && str[i + 1] != '%')
+		else if (str[i] == '%' && str[i + 1] != '%' && str[i + 1])
 		{
 			ft_startstruct(flags, n);
 			i = ft_checkflags(str, flags, i, n); // Store every flag on that variable
 			//ft_printflags(flags[n]);
-			ft_printer(args, flags, n); // Print that variable according to the flags
-			n += 1;
+			if (flags[n].type != 'a')
+			{
+				ft_printer(args, flags, n); // Print that variable according to the flags
+				n += 1;
+			}
 			//ft_printflags(flags[n]);
 		}
 		else

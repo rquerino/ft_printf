@@ -6,13 +6,13 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/04 16:16:55 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:06:35 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
@@ -40,10 +40,14 @@ typedef struct  s_flags
 	int		L;
 }               t_flags;
 
-
 /*
 ** Functions
 */
+
+int		ft_printf(const char *str, ...);
+int		ft_countargs(const char *str);
+void	ft_startstruct(t_flags *flags, int n);
+void	ft_printflags(t_flags flags);
 
 int		ft_countargs(const char *str);
 void	ft_printflags(t_flags flags);
@@ -72,7 +76,6 @@ char	*ft_dtoa(double n, int precision);
 ** Functions for type 's'
 */
 
-//char	*ft_printf_s(va_list args, t_flags *flags, int n);
 int		ft_printf_s(va_list args, t_flags flags);
 void	ft_checkwidth_s(t_flags flags, char *res, int len);
 void	ft_checkjwidth_s(t_flags flags, char *res);
@@ -82,7 +85,7 @@ char	*ft_checkdot_s(t_flags flags, char *var);//, int len);
 ** Functions for type 'c'
 */
 
-int		ft_printf_c(va_list args);
+int		ft_printf_c(va_list args, t_flags flags);
 
 /*
 ** Functions for type 'p'

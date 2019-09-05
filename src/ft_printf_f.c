@@ -6,11 +6,12 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 13:45:15 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/04 14:51:07 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 /*
 static int	ft_charsafterdot(char *var)
 {
