@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 14:06:35 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 16:23:37 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		ft_printf_c(va_list args, t_flags flags);
 ** Functions for type 'p'
 */
 
-int		ft_printf_p(va_list args);
+int		ft_printf_p(va_list args, t_flags flags);
 char	*ft_transform_base(unsigned long long n, int base);
 int		ft_blen(unsigned long long n, int base);
 

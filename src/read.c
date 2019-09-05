@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 14:40:08 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/05 15:30:25 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_getafterdot(const char *str, t_flags *flags, int i, int n)
 		afterdot = afterdot * 10 + (str[i] - '0');
 		i++;
 	}
-	if (justdot == i - 1)
+	if (justdot == i - 1 || afterdot == 0)
 		flags[n].justdot = 1;
 	flags[n].afterdot = afterdot;
 	return (i - 1);
@@ -105,7 +105,7 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 			flags[n].plus = 1;
 		else if (str[i] == ' ')
 			flags[n].hiddenplus = 1;
-		else if (str[i] == '0')
+		else if (str[i] == '0' && str[i - 1] != '.')
 			flags[n].zero = 1;
 		else if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L')
 			i = ft_getlength(str, flags[n], i);
@@ -119,21 +119,6 @@ int		ft_checkflags(const char *str, t_flags *flags, int i, int n)
 	}
 	flags[n].type = str[i];
 	return (i);
-}
-
-int		ft_printslash(const char *str, int i)
-{
-	if (str[i + 1] == '%' || str[i + 1] == '"' || str[i + 1] == '\\')
-		ft_putchar(str[i + 1]);
-	else if (str[i + 1] == 'n')
-		ft_putchar('\n');
-	else if (str[i + 1] == 't')
-		ft_putchar('\t');
-	else if (str[i + 1] == 'v')
-		ft_putchar('\v');
-	else if (str[i + 1] == 'r')
-		ft_putchar('\r');
-	return (i + 1);
 }
 
 void    ft_reader(const char *str, va_list args, t_flags *flags)
@@ -150,9 +135,7 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 			ft_putchar(str[i]);
 			i++;
 		}
-		else if (str[i] == '\\')
-			i = ft_printslash(str, i);
-		else if (str[i] == '%' && str[i + 1] != '%' && str[i + 1])
+		else if (str[i] == '%' && str[i + 1])
 		{
 			ft_startstruct(flags, n);
 			i = ft_checkflags(str, flags, i, n); // Store every flag on that variable
