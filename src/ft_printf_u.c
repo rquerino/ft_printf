@@ -6,15 +6,40 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 20:26:37 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 14:55:00 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+
+char	*ft_precision_u(t_flags flags, char *var, int len)
+{
+	int		i;
+	int		j;
+	char	*final;
+
+	if (flags.justdot == 1)
+		return (ft_strnew(0));
+	i = 0;
+	j = 0;
+	final = ft_strnew(flags.afterdot);
+	while (i < (flags.afterdot - len))
+	{
+		final[i] = '0';
+		i++;
+	}
+	while (var[j])
+	{
+		final[i] = var[j];
+		i++;
+		j++;
+	}
+	return (final);
+}
+
 /*
 ** Function to deal with 'u'.
-** Uses all the auxiliary functions of 'd'/'i' to handle the flags.
 */
 
 int		ft_printf_u(va_list args, t_flags flags)
@@ -33,12 +58,15 @@ int		ft_printf_u(va_list args, t_flags flags)
 	else
 		var = ft_utoa_base(va_arg(args, unsigned int), 10);
 	len = ft_strlen(var);
-	len += len >= 0 && (flags.plus == 1 || flags.hiddenplus == 1) ? 1 : 0;
-	if (flags.width <= len)
-		ft_nowidth_di(flags, var);
+	if (flags.afterdot > len || flags.justdot == 1)
+	{
+		var = ft_precision_u(flags, var, len);
+		len = ft_strlen(var);
+	}
+	if (flags.width > len)
+		ft_width_ox(flags, var, len);
 	else
-		ft_width_di(flags, var, len);
+		ft_putstr(var);
 	ft_strdel(&var);
-	return (0);
+	return (len > flags.width ? len : flags.width);
 }
-
