@@ -6,14 +6,14 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 14:42:31 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 15:01:38 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "stdio.h"
 
-char	*ft_precision_ox(t_flags flags, char *var, int len)
+char	*ft_precision_o(t_flags flags, char *var, int len)
 {
 	int		i;
 	int		j;
@@ -85,7 +85,7 @@ int		ft_printf_o(va_list args, t_flags flags)
 		var = ft_utoa_base(va_arg(args, unsigned), 8);
 	len = ft_strlen(var);
 	if (flags.afterdot > len || flags.justdot == 1 || flags.hashtag == 1)
-		var = ft_precision_ox(flags, var, len);
+		var = ft_precision_o(flags, var, len);
 	len = ft_strlen(var);
 	if (flags.width <= len)
 		ft_putstr(var);
