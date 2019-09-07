@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:50 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 15:55:13 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/06 15:24:19 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ int		ft_printf_s(va_list args, t_flags flags)
 	else
 		ft_putstr(res);
 	free(res);
-	free(var);
+	if (ft_strcmp(var, "(null)") == 0)
+		free(var);
 	return (0);
 }
 /*

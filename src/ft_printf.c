@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 15:24:13 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/06 15:37:43 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 /*
 Stuff to handle:
+
+- Return the number of printed chars
+- Free on 's'
 
 Basic flag errors: 
 '-' makes '0' useless. Need to advise the user
