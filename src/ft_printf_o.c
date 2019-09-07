@@ -6,11 +6,12 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 13:54:30 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 14:42:31 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "stdio.h"
 
 char	*ft_precision_ox(t_flags flags, char *var, int len)
 {
@@ -20,16 +21,13 @@ char	*ft_precision_ox(t_flags flags, char *var, int len)
 
 	if (flags.justdot == 1 && flags.hashtag == 0)
 		return (ft_strnew(0));
-	else if (flags.justdot == 1 && flags.hashtag == 1)
-		return (ft_strnew(1));
 	i = 0;
 	j = 0;
-	final = (flags.hashtag == 1) ? ft_strnew(flags.afterdot + 1) : ft_strnew(flags.afterdot);
+	final = flags.afterdot == 0 ? ft_strnew(1) : ft_strnew(flags.afterdot);
 	if (flags.hashtag == 1 && ft_strcmp(var, "0") != 0)
 	{
 		final[0] = '0';
 		i = 1;
-		len++;
 	}
 	while (i < (flags.afterdot - len))
 	{
@@ -45,15 +43,6 @@ char	*ft_precision_ox(t_flags flags, char *var, int len)
 	return (final);
 }
 
-void	ft_nowidth_ox(t_flags flags, char *var)
-{
-	if (flags.plus == 1 && var[0] != '-')
-		ft_putchar('+');
-	else if (flags.hiddenplus == 1 && var[0] != '-')
-		ft_putchar(' ');
-	ft_putstr(var);
-}
-
 void	ft_width_ox(t_flags flags, char *var, int len)
 {
 	int isneg;
@@ -61,7 +50,7 @@ void	ft_width_ox(t_flags flags, char *var, int len)
 	isneg = 0;
 	if (flags.justify == 1)
 	{
-		ft_nowidth_ox(flags, var);
+		ft_putstr(var);
 		ft_fillwidth(flags, flags.width - len);
 	}
 	else
@@ -99,7 +88,7 @@ int		ft_printf_o(va_list args, t_flags flags)
 		var = ft_precision_ox(flags, var, len);
 	len = ft_strlen(var);
 	if (flags.width <= len)
-		ft_nowidth_ox(flags, var);
+		ft_putstr(var);
 	else
 		ft_width_ox(flags, var, len);
 	ft_strdel(&var);

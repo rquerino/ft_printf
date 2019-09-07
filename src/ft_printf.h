@@ -6,7 +6,7 @@
 /*   By: pqueiroz <pqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 14:45:44 by pqueiroz         ###   ########.fr       */
+/*   Updated: 2019/09/07 14:55:29 by pqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ char	*ft_precision_di(char *var, int precision, int len);
 
 int		ft_printf_o(va_list args, t_flags flags);
 void	ft_width_ox(t_flags flags, char *var, int len);
-void	ft_nowidth_ox(t_flags flags, char *var);
 char	*ft_precision_ox(t_flags flags, char *var, int len);
 
 /*
