@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 21:22:26 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 15:01:56 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,37 @@
 ** hashtag = 1 and number != 0, start with 0x ONLY!!!!!!!!
 ** 
 */
+
+char	*ft_precision_x(t_flags flags, char *var, int len)
+{
+	int		i;
+	int		j;
+	char	*final;
+
+	if (flags.justdot == 1 && flags.hashtag == 0)
+		return (ft_strnew(0));
+	i = 0;
+	j = 0;
+	final = flags.afterdot == 0 ? ft_strnew(1) : ft_strnew(flags.afterdot);
+	if (flags.hashtag == 1 && ft_strcmp(var, "0") != 0)
+	{
+		final[0] = '0';
+		final[1] = flags.type == 'x' ? 'x' : 'X';
+		i = 2;
+	}
+	while (i < (flags.afterdot - len))
+	{
+		final[i] = '0';
+		i++;
+	}
+	while (var[j])
+	{
+		final[i] = var[j];
+		i++;
+		j++;
+	}
+	return (final);
+}
 
 void	ft_makehexlower(char *var)
 {
