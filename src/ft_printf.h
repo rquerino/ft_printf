@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 16:23:37 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/06 18:14:06 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ void	ft_startstruct(t_flags *flags, int n);
 int		ft_getlen(va_list args, int n);
 char	*ft_readflags(t_flags flags, int arg_len, va_list args, int n);
 void	ft_printer(va_list args, t_flags *flags, int n);
-char	*ft_ltoa(long long n);
+char	*ft_lltoa(long long n);
+char    *ft_ltoa(long n);
 size_t	ft_ulllen_base(unsigned long long n, int base);
 size_t	ft_ilen(int n);
 char	*ft_utoa_base(unsigned n, int base);
+char	*ft_ultoa_base(unsigned long n, int base);
 char	*ft_ulltoa_base(unsigned long long n, int base);
 int		ft_checkround(int n, int precision);
 int		ft_roundafter(long double n, int precision);
@@ -103,6 +105,7 @@ int		ft_printf_di(va_list args, t_flags flags);
 void	ft_width_di(t_flags flags, char *var, int len);
 void	ft_nowidth_di(t_flags flags, char *var);
 void	ft_fillwidth(t_flags flags, int len);
+char	*ft_precision_di(char *var, int precision, int len);
 
 /*
 ** Functions for type 'o'
