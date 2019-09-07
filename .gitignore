@@ -1,8 +1,12 @@
 *.dSYM
 *.swp
+._*
 .nfs*
 *.o
 *.a
 *.out
 pft/
-pft/
+.vscode/
+*test*
+includes/
+build/
