@@ -6,59 +6,78 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/06 18:17:28 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 13:54:30 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
+char	*ft_precision_ox(t_flags flags, char *var, int len)
+{
+	int		i;
+	int		j;
+	char	*final;
+
+	if (flags.justdot == 1 && flags.hashtag == 0)
+		return (ft_strnew(0));
+	else if (flags.justdot == 1 && flags.hashtag == 1)
+		return (ft_strnew(1));
+	i = 0;
+	j = 0;
+	final = (flags.hashtag == 1) ? ft_strnew(flags.afterdot + 1) : ft_strnew(flags.afterdot);
+	if (flags.hashtag == 1 && ft_strcmp(var, "0") != 0)
+	{
+		final[0] = '0';
+		i = 1;
+		len++;
+	}
+	while (i < (flags.afterdot - len))
+	{
+		final[i] = '0';
+		i++;
+	}
+	while (var[j])
+	{
+		final[i] = var[j];
+		i++;
+		j++;
+	}
+	return (final);
+}
+
 void	ft_nowidth_ox(t_flags flags, char *var)
 {
-	
-
+	if (flags.plus == 1 && var[0] != '-')
+		ft_putchar('+');
+	else if (flags.hiddenplus == 1 && var[0] != '-')
+		ft_putchar(' ');
+	ft_putstr(var);
 }
 
 void	ft_width_ox(t_flags flags, char *var, int len)
 {
-	
+	int isneg;
 
-}
-*/
-
-/*
-** Function to deal with 'o'.
-** Uses all the auxiliary functions of 'd'/'i' to handle the flags.
-*/
-
-char	*ft_hashtag_ox(t_flags flags, char *var, int len)
-{
-	char	*new;
-	int		i;
-	int		j;
-
-	if (flags.type == 'o')
+	isneg = 0;
+	if (flags.justify == 1)
 	{
-		new = ft_strnew(len + 1);
-		new[0] = '0';
-		i = 1;
+		ft_nowidth_ox(flags, var);
+		ft_fillwidth(flags, flags.width - len);
 	}
 	else
 	{
-		new = ft_strnew(len + 2);
-		new[0] = '0';
-		new[1] = 'X';
-		i = 2;
+		ft_fillwidth(flags, flags.width - len);
+		if (var[0] != '-' && flags.plus == 1)
+			ft_putchar('+');
+		else if (var[0] != '-' && flags.hiddenplus == 1)
+			ft_putchar(' ');
+		ft_putstr(var);
 	}
-	j = 0;
-	while (var[j])
-	{
-		new[i] = var[j];
-		i++;
-		j++;
-	}
-	return (new);
 }
+
+/*
+** Function to deal with 'o'.
+*/
 
 int		ft_printf_o(va_list args, t_flags flags)
 {
@@ -76,14 +95,13 @@ int		ft_printf_o(va_list args, t_flags flags)
 	else
 		var = ft_utoa_base(va_arg(args, unsigned), 8);
 	len = ft_strlen(var);
-	if (var && flags.hashtag == 1)
-		var = ft_hashtag_ox(flags, var, len);
-	len += len >= 0 && flags.hashtag == 1 ? 1 : 0;
-	ft_putstr(var);
-	//if (flags.width <= len)
-	//	ft_nowidth_ox(flags, var);
-	//else
-//		ft_width_ox(flags, var, len);
+	if (flags.afterdot > len || flags.justdot == 1 || flags.hashtag == 1)
+		var = ft_precision_ox(flags, var, len);
+	len = ft_strlen(var);
+	if (flags.width <= len)
+		ft_nowidth_ox(flags, var);
+	else
+		ft_width_ox(flags, var, len);
 	ft_strdel(&var);
 	return (0);
 }

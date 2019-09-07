@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/06 18:14:06 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 13:01:49 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ char	*ft_precision_di(char *var, int precision, int len);
 */
 
 int		ft_printf_o(va_list args, t_flags flags);
-char	*ft_hashtag_ox(t_flags flags, char *var, int len);
-
+void	ft_width_ox(t_flags flags, char *var, int len);
+void	ft_nowidth_ox(t_flags flags, char *var);
+char	*ft_precision_ox(t_flags flags, char *var, int len);
 
 /*
 ** Functions for type 'u'
