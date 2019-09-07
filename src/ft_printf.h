@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pqueiroz <pqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 13:01:49 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 14:45:44 by pqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "../libft/libft.h"
+# include "libft.h"
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>

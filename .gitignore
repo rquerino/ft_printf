@@ -1,10 +1,12 @@
 *.dSYM
 *.swp
+._*
 .nfs*
 *.o
 *.a
 *.out
 pft/
 .vscode/
-libftprintf.a
 *test*
+includes/
+build/

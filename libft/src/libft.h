@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pqueiroz <pqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 11:17:33 by rquerino          #+#    #+#             */
-/*   Updated: 2019/08/21 12:50:48 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 14:41:47 by pqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ void				ft_putnbr_fd(int n, int fd);
 
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
+char				*ft_ulltoa_base(unsigned long long n, int base);
+char				*ft_ulltoa(unsigned long long n);
+char				*ft_ultoa_base(unsigned long n, int base);
+char				*ft_ultoa(unsigned long n);
+char				*ft_utoa_base(unsigned n, int base);
+char				*ft_utoa(unsigned n);
+
+size_t				ft_ull_len_base(unsigned long long n, int base);
+size_t				ft_ull_len(unsigned long long n);
 
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
