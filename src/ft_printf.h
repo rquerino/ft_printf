@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pqueiroz <pqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 15:04:09 by pqueiroz         ###   ########.fr       */
+/*   Updated: 2019/09/07 18:38:02 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	ft_printflags(t_flags flags);
 
 int		ft_countargs(const char *str);
 void	ft_printflags(t_flags flags);
-int		ft_getwidth(const char *str, t_flags *flags, int i, int n);
-int		ft_getafterdot(const char *str, t_flags *flags, int i, int n);
-int		ft_getlength(const char *str, t_flags flags, int i);
-int		ft_checkflags(const char *str, t_flags *flags, int i, int n);
+int		ft_getwidth(const char *str, t_flags *flags, int i);
+int		ft_getafterdot(const char *str, t_flags *flags, int i);
+int		ft_getlength(const char *str, t_flags *flags, int i);
+int		ft_checkflags(const char *str, t_flags *flags, int i);
 void	ft_reader(const char *str, va_list args, t_flags *flags);
 void	ft_startstruct(t_flags *flags, int n);
 int		ft_getlen(va_list args, int n);
@@ -62,11 +62,8 @@ char	*ft_readflags(t_flags flags, int arg_len, va_list args, int n);
 void	ft_printer(va_list args, t_flags *flags, int n);
 char	*ft_lltoa(long long n);
 char    *ft_ltoa(long n);
-size_t	ft_ulllen_base(unsigned long long n, int base);
+size_t	ft_lllen_base(long long n, int base);
 size_t	ft_ilen(int n);
-char	*ft_utoa_base(unsigned n, int base);
-char	*ft_ultoa_base(unsigned long n, int base);
-char	*ft_ulltoa_base(unsigned long long n, int base);
 int		ft_checkround(int n, int precision);
 int		ft_roundafter(long double n, int precision);
 void	ft_dotafter(char *res, char *after, int precision);
@@ -112,7 +109,7 @@ char	*ft_precision_di(char *var, int precision, int len);
 */
 
 int		ft_printf_o(va_list args, t_flags flags);
-void	ft_width_ox(t_flags flags, char *var, int len);
+void	ft_width_o(t_flags flags, char *var, int len);
 char	*ft_precision_o(t_flags flags, char *var, int len);
 
 /*
@@ -129,6 +126,7 @@ char	*ft_precision_u(t_flags flags, char *var, int len);
 int		ft_printf_x(va_list args, t_flags flags);
 void	ft_makehexlower(char *var);
 char	*ft_precision_x(t_flags flags, char *var, int len);
+void	ft_width_x(t_flags flags, char *var, int len);
 
 /*
 ** Functions for type 'f'
