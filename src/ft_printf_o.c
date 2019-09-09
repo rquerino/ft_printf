@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 18:37:39 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/07 19:28:47 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,15 @@ char	*ft_precision_o(t_flags flags, char *var, int len)
 
 void	ft_width_o(t_flags flags, char *var, int len)
 {
-	int isneg;
-
-	isneg = 0;
 	if (flags.justify == 1)
 	{
-		if (flags.hashtag && flags.type != 'o')
-			ft_putstr("0x");
-		if (flags.type == 'x')
-			ft_makehexlower(var);
-		else
-			ft_putstr(var);
+		ft_putstr(var);
 		ft_fillwidth(flags, flags.width - len);
 	}
 	else
 	{
 		ft_fillwidth(flags, flags.width - len);
-		if (flags.hashtag && flags.type != 'o')
-			ft_putstr("0x");
-		if (flags.type == 'x')
-			ft_makehexlower(var);
-		else
-			ft_putstr(var);
+		ft_putstr(var);
 	}
 }
 

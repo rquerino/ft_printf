@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 14:49:58 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/08 21:44:30 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char	*ft_afterdot(long double n, int precision)
 	int			aux;
 	char		*res;
 
+	if (precision == 0)
+		return (ft_strnew(0));
 	i = 0;
 	aux = (int)n;
 	after = n - aux;
@@ -103,8 +105,9 @@ char	*ft_afterdot(long double n, int precision)
 		i++;
 	}
 	aux = (int)after;
+	after = n - aux;
 	//CONFERIR SE PRECISION >6 TRATA OS ARREDONDAMENTOS
-	if (ft_roundafter(n, precision) >= 5 || ft_checkround(aux, precision)) 
+	if ((int)after * 10 >= 5 || ft_checkround(aux, precision)) 
 		aux += 1;
 	ft_dotafter(res, ft_itoa(aux), precision);
 	return (res);
@@ -116,7 +119,10 @@ char	*ft_ldtoa(long double n, int precision)
 	char	*after;
 	char	*res;
 
-	before = ft_itoa((int)n);
+	if ((int)n == 0 && n < 0)
+		before = strdup("-0");
+	else
+		before = ft_itoa((int)n);
 	after = ft_afterdot(n, precision);
 	res = ft_strcat(before, after);
 	//printf("\n\nres: %s\n\n", res);

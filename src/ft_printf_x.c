@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 21:22:26 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 18:39:20 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/08 20:42:24 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,44 @@ void	ft_makehexlower(char *var)
 	}
 }
 
-void	ft_width_x(t_flags flags, char *var, int len)
+void	ft_width_x(t_flags flags, char *res, int len, char *var)
 {
-
+	if (flags.justify == 1)
+	{
+		if (flags.hashtag && ft_strcmp(var, "0") != 0)
+			ft_putstr("0x");
+		if (flags.type == 'x')
+			ft_makehexlower(res);
+		else
+			ft_putstr(res);
+		ft_fillwidth(flags, flags.width - len);
+	}
+	else
+	{
+		if (flags.zero == 1 && flags.afterdot == 0 && flags.justdot == 0)
+		{
+			if (flags.hashtag && ft_strcmp(var, "0") != 0)
+				ft_putstr("0x");
+			ft_fillwidth(flags, flags.width - len);	
+		}
+		else
+		{
+			ft_fillwidth(flags, flags.width - len);
+			if (flags.hashtag && ft_strcmp(var, "0") != 0)
+				ft_putstr("0x");	
+		}
+		if (flags.type == 'x')
+			ft_makehexlower(res);
+		else
+			ft_putstr(res);
+	}
 }
 
 int		ft_printf_x(va_list args, t_flags flags)
 {
 	int		len;
     char    *var;
+	char	*res;
 
     if (flags.h == 1)
         var = ft_utoa_base((unsigned short)va_arg(args, unsigned), 16);
@@ -72,22 +101,25 @@ int		ft_printf_x(va_list args, t_flags flags)
 	len = ft_strlen(var);
 	if (flags.afterdot > len || flags.justdot == 1)
 	{
-		var = ft_precision_x(flags, var, len);
+		res = ft_precision_x(flags, var, len);
 		len = flags.afterdot;
 	}
-	if (var && flags.hashtag)
+	else
+		res = ft_strdup(var);
+	if (var && (flags.hashtag && ft_strcmp(var, "0") != 0) && flags.justdot == 0)
 		len += 2;
 	if (flags.width > len)
-		ft_width_x(flags, var, len);
+		ft_width_x(flags, res, len, var);
 	else
 	{
-		if (flags.hashtag)
+		if (flags.hashtag && ft_strcmp(var, "0") != 0)
 			ft_putstr("0x");
 		if (flags.type == 'x')
-			ft_makehexlower(var);
+			ft_makehexlower(res);
 		else
-			ft_putstr(var);
+			ft_putstr(res);
 	}
-	ft_strdel(&var);
-	return (0);
+	ft_strdel(&res);
+	//ft_strdel(&var);
+	return (flags.width > len ? flags.width : len);
 }

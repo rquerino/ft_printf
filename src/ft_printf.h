@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 18:38:02 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/08 20:41:15 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char	*ft_precision_u(t_flags flags, char *var, int len);
 int		ft_printf_x(va_list args, t_flags flags);
 void	ft_makehexlower(char *var);
 char	*ft_precision_x(t_flags flags, char *var, int len);
-void	ft_width_x(t_flags flags, char *var, int len);
+void	ft_width_x(t_flags flags, char *res, int len, char *var);
 
 /*
 ** Functions for type 'f'

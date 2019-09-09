@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 13:45:15 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 11:40:50 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/08 21:02:56 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		ft_printf_f(va_list args, t_flags flags)
     char    *var;
 
     if (flags.L == 1)
-        var = ft_ldtoa(va_arg(args, long double), flags.afterdot > 0 ? flags.afterdot : 6);
+        var = ft_ldtoa(va_arg(args, long double), flags.afterdot || flags.justdot > 0 ? flags.afterdot : 6);
 	else
-		var = ft_dtoa(va_arg(args, double), flags.afterdot > 0 ? flags.afterdot : 6);
+		var = ft_dtoa(va_arg(args, double), flags.afterdot > 0 || flags.justdot ? flags.afterdot : 6);
 	len = ft_strlen(var);
 	if (flags.width <= len)
 		ft_nowidth_f(flags, var);
