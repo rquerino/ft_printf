@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/08 20:41:15 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 10:43:44 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,12 @@ char	*ft_lltoa(long long n);
 char    *ft_ltoa(long n);
 size_t	ft_lllen_base(long long n, int base);
 size_t	ft_ilen(int n);
-int		ft_checkround(int n, int precision);
-int		ft_roundafter(long double n, int precision);
-void	ft_dotafter(char *res, char *after, int precision);
-char	*ft_afterdot(long double n, int precision);
+// int		ft_checkround(int n, int after);
+// char	*ft_roundbefore(long double n, int precision);
+// void	ft_dotafter(char *res, char *after, int precision, int zerosbefore);
+// char	*ft_afterdot(long double n, int precision);
+double	ft_pow(double n, int pow);
+long	ft_round(long double n, int precision);
 char	*ft_ldtoa(long double n, int precision);
 char	*ft_dtoa(double n, int precision);
 
@@ -135,5 +137,11 @@ void	ft_width_x(t_flags flags, char *res, int len, char *var);
 int		ft_printf_f(va_list args, t_flags flags);
 void	ft_nowidth_f(t_flags flags, char *var);
 void	ft_width_f(t_flags flags, char *var, int len);
+
+/*
+** Functions for type '%'
+*/
+
+//int		ft_printf_perc(va_list args, t_flags flags);
 
 #endif
