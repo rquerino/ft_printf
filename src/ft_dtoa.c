@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 14:49:58 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 12:55:45 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 13:52:44 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,23 +154,23 @@ double	ft_pow(double n, int pow)
 
 long	ft_round(long double n, int precision)
 {
-	long long	tmp;
+	long long	aux;
 
-	tmp = n * ft_pow(10, precision + 1);
-	if (tmp % 10 >= 5)
-		tmp = tmp / 10 + 1;
-	else if (tmp % 10 <= -5)
-		tmp = tmp / 10 - 1;
+	aux = n * ft_pow(10, precision + 1);
+	if (aux % 10 >= 5)
+		aux = aux / 10 + 1;
+	else if (aux % 10 <= -5)
+		aux = aux / 10 - 1;
 	else
-		tmp /= 10;
-	return (tmp);
+		aux /= 10;
+	return (aux);
 }
 
 
 char	*ft_ldtoa(long double n, int precision)
 {
 	char		*s;
-	long long	tmp;
+	long long	aux;
 	long long	t;
 	int			length;
 
@@ -182,10 +182,10 @@ char	*ft_ldtoa(long double n, int precision)
 			return (ft_itoa((int)n + (n > 0 ? 1 : -1)));
 		return (ft_itoa((int)n));
 	}
-	tmp = ft_round(n, precision);
-	t = (tmp < 0) ? -tmp : tmp;
+	aux = ft_round(n, precision);
+	t = (aux < 0) ? -aux : aux;
 	length = (n < 0 ? 3 : 2);
-	while (tmp /= 10)
+	while (aux /= 10)
 		++length;
 	(n < 1 && n > -1) ? length = 3 + precision : 0;
 	(n >= 0 && n < 1) ? length = 2 + precision : 0;

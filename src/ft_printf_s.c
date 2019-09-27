@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:50 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/06 15:24:19 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:10:00 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*ft_checkdot_s(t_flags flags, char *var)//, int len)
 		result[i] = var[i];
 		i++;
 	}
-	//result[i] = '\0';
 	return (result);
 }
 
@@ -69,9 +68,8 @@ void	ft_checkjwidth_s(t_flags flags, char *res)
 		final[i] = ' ';
 		i++;
 	}
-	//final[i] = '\0';
 	ft_putstr(final);
-	free(final);
+	ft_strdel(&final);
 }
 
 /*
@@ -99,12 +97,10 @@ void	ft_checkwidth_s(t_flags flags, char *res, int len)
 		i++;
 		j++;
 	}
-	//final[i] = '\0';
 	ft_putstr(final);
-	free(final);
+	ft_strdel(&final);
 }
 
-//char	*ft_readflags_s(t_flags flags, char *var, int len)
 int		ft_printf_s(va_list args, t_flags flags)
 {
 	char	*res;
@@ -113,7 +109,7 @@ int		ft_printf_s(va_list args, t_flags flags)
 
 	var = va_arg(args, char*);
 	if (var == NULL)
-		var = ft_strdup("(null)");
+		var = "(null)";
 	if (flags.width == 0 && flags.justdot == 1)
 		return (0);
 	len = ft_strlen(var);
@@ -133,20 +129,6 @@ int		ft_printf_s(va_list args, t_flags flags)
 	}
 	else
 		ft_putstr(res);
-	free(res);
-	if (ft_strcmp(var, "(null)") == 0)
-		free(var);
-	return (0);
+	ft_strdel(&res);
+	return (flags.width > len ? flags.width : len);
 }
-/*
-char	*ft_printf_s(va_list args, t_flags *flags, int n)
-{
-	char	*var;
-	int		len;
-	char	*print;
-
-	var = va_arg(args, char *);
-	len = ft_strlen(var);
-	print = ft_readflags_s(flags[n], var, len);
-	return (print);
-}*/

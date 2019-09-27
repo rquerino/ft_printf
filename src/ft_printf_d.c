@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:55 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 17:32:59 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:28:01 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		ft_printf_di(va_list args, t_flags flags)
 {
 	int		len;
     char    *var;
+	char	*final;
 
     if (flags.h == 1)
         var = ft_itoa((short)va_arg(args, int));
@@ -129,12 +130,15 @@ int		ft_printf_di(va_list args, t_flags flags)
 		var = ft_itoa(va_arg(args, int));
 	len = ft_strlen(var);
 	if (len - (var[0] == '-' ? 1 : 0) < flags.afterdot || flags.justdot == 1)
-		var = ft_precision_di(var, flags.afterdot, len);
-	len = ft_strlen(var) + ((flags.plus == 1 || flags.hiddenplus == 1) && var[0] != '-' ? 1 : 0);
-	if (flags.width <= len)
-		ft_nowidth_di(flags, var);
+		final = ft_precision_di(var, flags.afterdot, len);
 	else
-		ft_width_di(flags, var, len);
+		final = ft_strdup(var);
+	len = ft_strlen(final) + ((flags.plus == 1 || flags.hiddenplus == 1) && final[0] != '-' ? 1 : 0);
+	if (flags.width <= len)
+		ft_nowidth_di(flags, final);
+	else
+		ft_width_di(flags, final, len);
+	ft_strdel(&final);
 	ft_strdel(&var);
 	return (0);
 }

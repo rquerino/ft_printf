@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/06 15:37:43 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:11:14 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,20 +138,14 @@ int		ft_countargs(const char *str)
 int	ft_printf(const char *str, ...)
 {
 	va_list args;
-	//int		ret;
 	t_flags *flags;
 	int		n_args;
-	/*int		i;
-	double	d;
-	char	*s;*/
+	int		ret;
 
 	n_args = ft_countargs(str);
-	//flags = NULL;
 	flags = malloc(sizeof(t_flags) * n_args);
 	va_start(args, str);
-	//ret = ft_doprintf(str, args);
-	ft_reader(str, args, flags);
+	ret = ft_reader(str, args, flags);
 	va_end(args);
-	return (1);
-	//return (ret);
+	return (ret);
 }

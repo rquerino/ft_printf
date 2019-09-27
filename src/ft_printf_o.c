@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 19:28:47 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:31:09 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_width_o(t_flags flags, char *var, int len)
 int		ft_printf_o(va_list args, t_flags flags)
 {
 	char	*var;
+	char	*final;
 	int		len;
 
 	if (flags.h == 1)
@@ -77,13 +78,16 @@ int		ft_printf_o(va_list args, t_flags flags)
 	len = ft_strlen(var);
 	if (flags.afterdot > len || flags.justdot == 1 || flags.hashtag == 1)
 	{
-		var = ft_precision_o(flags, var, len);
-		len = ft_strlen(var);
+		final = ft_precision_o(flags, var, len);
+		len = ft_strlen(final);
 	}
-	if (flags.width <= len)
-		ft_putstr(var);
 	else
-		ft_width_o(flags, var, len);
+		final = ft_strdup(var);
+	if (flags.width <= len)
+		ft_putstr(final);
+	else
+		ft_width_o(flags, final, len);
 	ft_strdel(&var);
-	return (0);
+	ft_strdel(&final);
+	return (flags.width > len ? flags.width : len);
 }

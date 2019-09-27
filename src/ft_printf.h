@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 10:43:44 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:28:25 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int		ft_getwidth(const char *str, t_flags *flags, int i);
 int		ft_getafterdot(const char *str, t_flags *flags, int i);
 int		ft_getlength(const char *str, t_flags *flags, int i);
 int		ft_checkflags(const char *str, t_flags *flags, int i);
-void	ft_reader(const char *str, va_list args, t_flags *flags);
+int		ft_reader(const char *str, va_list args, t_flags *flags);
 void	ft_startstruct(t_flags *flags, int n);
 int		ft_getlen(va_list args, int n);
 char	*ft_readflags(t_flags flags, int arg_len, va_list args, int n);
-void	ft_printer(va_list args, t_flags *flags, int n);
+int		ft_printer(va_list args, t_flags *flags, int n);
 char	*ft_lltoa(long long n);
 char    *ft_ltoa(long n);
 size_t	ft_lllen_base(long long n, int base);
@@ -142,6 +142,6 @@ void	ft_width_f(t_flags flags, char *var, int len);
 ** Functions for type '%'
 */
 
-//int		ft_printf_perc(va_list args, t_flags flags);
+int		ft_printf_perc(t_flags flags);
 
 #endif

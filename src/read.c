@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 16:06:36 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:00:20 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		ft_checkflags(const char *str, t_flags *flags, int i)
 {
 	while (str[i] != 'c' && str[i] != 'd' && str[i] != 'f' && str[i] != 'p'
 		&& str[i] != 'i' && str[i] != 'o' && str[i] != 's' && str[i] != 'u'
-		&& str[i] != 'x' && str[i] != 'X')
+		&& str[i] != 'x' && str[i] != 'X' && str[i] != '%')
 	{
 		if (str[i] == '-')
 			flags->justify = 1;
@@ -123,13 +123,15 @@ int		ft_checkflags(const char *str, t_flags *flags, int i)
 	return (i);
 }
 
-void    ft_reader(const char *str, va_list args, t_flags *flags)
+int    ft_reader(const char *str, va_list args, t_flags *flags)
 {
 	int n;
 	int i;
+	int	chars;
 
 	i = 0;
 	n = 0;
+	chars = 0;
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1] == '%')
@@ -140,10 +142,10 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 		else if (str[i] == '%' && str[i + 1])
 		{
 			ft_startstruct(flags, n);
-			i = ft_checkflags(str, &flags[n], i); // Store every flag on that variable
+			i = ft_checkflags(str, &flags[n], i + 1); // Store every flag on that variable
 			if (flags[n].type != 'a')
 			{
-				ft_printer(args, flags, n); // Print that variable according to the flags
+				chars += ft_printer(args, flags, n); // Print that variable according to the flags
 				n += 1;
 			}
 		}
@@ -151,4 +153,5 @@ void    ft_reader(const char *str, va_list args, t_flags *flags)
 			ft_putchar(str[i]);
 		i++;
 	}
+	return (chars);
 }

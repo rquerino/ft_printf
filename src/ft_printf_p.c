@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 22:50:11 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 16:48:49 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:20:24 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		ft_printf_p(va_list args, t_flags flags)
 	len += 2;
 	if (flags.width <= len)
 		ft_printp(res);
-	if (flags.width > len)
+	else if (flags.width > len)
 	{
 		if (flags.justify == 1)
 			ft_printp(res);
@@ -93,6 +93,6 @@ int		ft_printf_p(va_list args, t_flags flags)
 		if (flags.justify == 0)
 			ft_printp(res);
 	}
-	free(res);
+	ft_strdel(&res);
 	return (flags.width > len ? flags.width : len);
 }

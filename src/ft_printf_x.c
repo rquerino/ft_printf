@@ -6,11 +6,20 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 21:22:26 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/08 20:42:24 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:35:17 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+
+void	ft_print0x(char type)
+{
+	if (type == 'x')
+		ft_putstr("0x");
+	else if (type == 'X')
+		ft_putstr("0X");
+}
 
 /*
 ** hashtag = 1 and number != 0, start with 0x ONLY!!!!!!!!
@@ -54,7 +63,7 @@ void	ft_width_x(t_flags flags, char *res, int len, char *var)
 	if (flags.justify == 1)
 	{
 		if (flags.hashtag && ft_strcmp(var, "0") != 0)
-			ft_putstr("0x");
+			ft_print0x(flags.type);
 		if (flags.type == 'x')
 			ft_makehexlower(res);
 		else
@@ -66,14 +75,14 @@ void	ft_width_x(t_flags flags, char *res, int len, char *var)
 		if (flags.zero == 1 && flags.afterdot == 0 && flags.justdot == 0)
 		{
 			if (flags.hashtag && ft_strcmp(var, "0") != 0)
-				ft_putstr("0x");
+				ft_print0x(flags.type);
 			ft_fillwidth(flags, flags.width - len);	
 		}
 		else
 		{
 			ft_fillwidth(flags, flags.width - len);
 			if (flags.hashtag && ft_strcmp(var, "0") != 0)
-				ft_putstr("0x");	
+				ft_print0x(flags.type);
 		}
 		if (flags.type == 'x')
 			ft_makehexlower(res);
@@ -113,13 +122,13 @@ int		ft_printf_x(va_list args, t_flags flags)
 	else
 	{
 		if (flags.hashtag && ft_strcmp(var, "0") != 0)
-			ft_putstr("0x");
+			ft_print0x(flags.type);
 		if (flags.type == 'x')
 			ft_makehexlower(res);
 		else
 			ft_putstr(res);
 	}
 	ft_strdel(&res);
-	//ft_strdel(&var);
+	ft_strdel(&var);
 	return (flags.width > len ? flags.width : len);
 }

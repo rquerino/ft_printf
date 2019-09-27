@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 13:45:15 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 12:54:07 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:07:27 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,3 @@ int		ft_printf_f(va_list args, t_flags flags)
 	ft_strdel(&var);
 	return (0);
 }
-
-
-/*
-To do:
-
-1- add zeros after if positive, before if negative in case width > len.
-2- Round number if precision < quantity of numbers
-*/

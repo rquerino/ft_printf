@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 20:26:37 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 19:26:30 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:34:00 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_printf_u(va_list args, t_flags flags)
 {
 	int		len;
     char    *var;
+	char	*final;
 
     if (flags.h == 1)
         var = ft_utoa_base((unsigned short)va_arg(args, unsigned int), 10);
@@ -60,13 +61,16 @@ int		ft_printf_u(va_list args, t_flags flags)
 	len = ft_strlen(var);
 	if (flags.afterdot > len || flags.justdot == 1)
 	{
-		var = ft_precision_u(flags, var, len);
-		len = ft_strlen(var);
+		final = ft_precision_u(flags, var, len);
+		len = ft_strlen(final);
 	}
-	if (flags.width > len)
-		ft_width_o(flags, var, len);
 	else
-		ft_putstr(var);
+		final = ft_strdup(var);
+	if (flags.width > len)
+		ft_width_o(flags, final, len);
+	else
+		ft_putstr(final);
 	ft_strdel(&var);
+	ft_strdel(&final);
 	return (len > flags.width ? len : flags.width);
 }
