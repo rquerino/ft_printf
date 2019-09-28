@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/25 14:59:57 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 16:31:09 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 11:53:32 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,16 @@ int		ft_printf_o(va_list args, t_flags flags)
 		var = ft_utoa_base((unsigned short)va_arg(args, unsigned), 8);
 	else if (flags.hh == 1)
 		var = ft_utoa_base((unsigned char)va_arg(args, unsigned), 8);
-	else if (flags.l == 1) 
+	else if (flags.l == 1)
 		var = ft_ultoa_base(va_arg(args, unsigned long), 8);
 	else if (flags.ll == 1)
 		var = ft_ulltoa_base(va_arg(args, unsigned long long), 8);
 	else
 		var = ft_utoa_base(va_arg(args, unsigned), 8);
 	len = ft_strlen(var);
-	if (flags.afterdot > len || flags.justdot == 1 || flags.hashtag == 1)
-	{
-		final = ft_precision_o(flags, var, len);
-		len = ft_strlen(final);
-	}
-	else
-		final = ft_strdup(var);
+	final = (flags.afterdot > len || flags.justdot == 1 || flags.hashtag == 1) ?
+		ft_precision_o(flags, var, len) : ft_strdup(var);
+	len = ft_strlen(final);
 	if (flags.width <= len)
 		ft_putstr(final);
 	else

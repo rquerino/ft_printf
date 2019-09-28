@@ -6,12 +6,11 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:55 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 16:28:01 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 11:42:09 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "stdio.h"
 
 /*
 ** Functions to deal with types 'd' and 'i'.
@@ -33,19 +32,12 @@ char	*ft_precision_di(char *var, int precision, int len)
 	{
 		final[0] = '-';
 		i = 1;
-		j = 1;		
+		j = 1;
 	}
 	while (i < (precision - (var[0] == '-' ? len - 2 : len)))
-	{
-		final[i] = '0';
-		i++;
-	}
+		final[i++] = '0';
 	while (var[j])
-	{
-		final[i] = var[j];
-		i++;
-		j++;
-	}
+		final[i++] = var[j++];
 	return (final);
 }
 
@@ -115,17 +107,17 @@ void	ft_width_di(t_flags flags, char *var, int len)
 int		ft_printf_di(va_list args, t_flags flags)
 {
 	int		len;
-    char    *var;
+	char	*var;
 	char	*final;
 
-    if (flags.h == 1)
-        var = ft_itoa((short)va_arg(args, int));
-    else if (flags.hh == 1)
-        var = ft_itoa((char)va_arg(args, int));
-    else if (flags.l == 1) 
-        var = ft_ltoa(va_arg(args, long));
-    else if (flags.ll == 1)
-        var = ft_lltoa(va_arg(args, long long));
+	if (flags.h == 1)
+		var = ft_itoa((short)va_arg(args, int));
+	else if (flags.hh == 1)
+		var = ft_itoa((char)va_arg(args, int));
+	else if (flags.l == 1)
+		var = ft_ltoa(va_arg(args, long));
+	else if (flags.ll == 1)
+		var = ft_lltoa(va_arg(args, long long));
 	else
 		var = ft_itoa(va_arg(args, int));
 	len = ft_strlen(var);
@@ -133,12 +125,13 @@ int		ft_printf_di(va_list args, t_flags flags)
 		final = ft_precision_di(var, flags.afterdot, len);
 	else
 		final = ft_strdup(var);
-	len = ft_strlen(final) + ((flags.plus == 1 || flags.hiddenplus == 1) && final[0] != '-' ? 1 : 0);
+	len = ft_strlen(final) + ((flags.plus == 1 || flags.hiddenplus == 1)
+		&& final[0] != '-' ? 1 : 0);
 	if (flags.width <= len)
 		ft_nowidth_di(flags, final);
 	else
 		ft_width_di(flags, final, len);
 	ft_strdel(&final);
 	ft_strdel(&var);
-	return (0);
+	return (flags.width > len ? flags.width : len);
 }

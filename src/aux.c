@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:33:02 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/07 16:08:30 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 11:34:47 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_ilen(int n)
 	return (i);
 }
 
-size_t		ft_lllen_base(long long n, int base)
+size_t	ft_lllen_base(long long n, int base)
 {
 	size_t	i;
 
@@ -34,7 +34,7 @@ size_t		ft_lllen_base(long long n, int base)
 	return (i);
 }
 
-char    *ft_lltoa(long long n)
+char	*ft_lltoa(long long n)
 {
 	char				*res;
 	int					len;
@@ -56,7 +56,7 @@ char    *ft_lltoa(long long n)
 	return (res);
 }
 
-char    *ft_ltoa(long n)
+char	*ft_ltoa(long n)
 {
 	return (ft_lltoa(n));
 }

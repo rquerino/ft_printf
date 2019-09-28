@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:50 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 16:10:00 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 11:59:09 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** (precision) or just dots and transform *var accordingly.
 */
 
-char	*ft_checkdot_s(t_flags flags, char *var)//, int len)
+char	*ft_checkdot_s(t_flags flags, char *var)
 {
 	int		i;
 	char	*result;
@@ -47,7 +47,7 @@ char	*ft_checkdot_s(t_flags flags, char *var)//, int len)
 
 /*
 ** Function called after ft_s_checkdots if there's a
-** justify flag and width is bigger then res length. 
+** justify flag and width is bigger then res length.
 ** Transforms *res accordingly.
 */
 
@@ -55,7 +55,7 @@ void	ft_checkjwidth_s(t_flags flags, char *res)
 {
 	char	*final;
 	int		i;
-	
+
 	i = 0;
 	final = ft_strnew(flags.width);
 	while (res[i] != '\0' && flags.justdot == 0)
@@ -82,7 +82,7 @@ void	ft_checkwidth_s(t_flags flags, char *res, int len)
 	char	*final;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	j = 0;
 	final = ft_strnew(flags.width);
@@ -113,13 +113,10 @@ int		ft_printf_s(va_list args, t_flags flags)
 	if (flags.width == 0 && flags.justdot == 1)
 		return (0);
 	len = ft_strlen(var);
-	if ((flags.afterdot > 0 && flags.afterdot < len) || flags.justdot == 1)
-	{
-		res = ft_checkdot_s(flags, var);//, len);
-		len = flags.afterdot;
-	}
-	else
-		res = ft_strdup(var);
+	res = ((flags.afterdot > 0 && flags.afterdot < len) || flags.justdot == 1) ?
+		ft_checkdot_s(flags, var) : ft_strdup(var);
+	len = ((flags.afterdot > 0 && flags.afterdot < len) || flags.justdot == 1) ?
+		flags.afterdot : len;
 	if (flags.width > 0 && flags.width > len)
 	{
 		if (flags.justify == 1)

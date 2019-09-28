@@ -6,35 +6,14 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 16:00:20 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 12:41:01 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-/*
-** These functions will read the string and and store information
-** about the flags of each variable.
-
-char	*ft_gettype(char c)
-{
-	//c,d,e,f,g,i,o,s,u,x
-	if (c == 'c' || c == 'd' || c == 'i' || c == 'o' || c == 'x' ||
-		c == 'u')
-		return ("int");
-	else if (c == 'f' || c == 'e' || c == 'g')
-		return ("double");
-	else if (c == 's')
-		return ("char *");
-	else if  (c == 'p')
-		return ("void *");
-	return ("error");
-}
-*/
-
-
-int		ft_getlength(const char *str, t_flags *flags, int i)
+int	ft_getlength(const char *str, t_flags *flags, int i)
 {
 	if (str[i] == 'l')
 	{
@@ -57,11 +36,11 @@ int		ft_getlength(const char *str, t_flags *flags, int i)
 			flags->h = 1;
 	}
 	else if (str[i] == 'L')
-		flags->L = 1;
+		flags->up_l = 1;
 	return (i);
 }
 
-int		ft_getwidth(const char *str, t_flags *flags, int i)
+int	ft_getwidth(const char *str, t_flags *flags, int i)
 {
 	int	width;
 
@@ -75,7 +54,7 @@ int		ft_getwidth(const char *str, t_flags *flags, int i)
 	return (i - 1);
 }
 
-int		ft_getafterdot(const char *str, t_flags *flags, int i)
+int	ft_getafterdot(const char *str, t_flags *flags, int i)
 {
 	int afterdot;
 	int	justdot;
@@ -94,8 +73,7 @@ int		ft_getafterdot(const char *str, t_flags *flags, int i)
 	return (i - 1);
 }
 
-// Not needed: e, g
-int		ft_checkflags(const char *str, t_flags *flags, int i)
+int	ft_checkflags(const char *str, t_flags *flags, int i)
 {
 	while (str[i] != 'c' && str[i] != 'd' && str[i] != 'f' && str[i] != 'p'
 		&& str[i] != 'i' && str[i] != 'o' && str[i] != 's' && str[i] != 'u'
@@ -123,7 +101,7 @@ int		ft_checkflags(const char *str, t_flags *flags, int i)
 	return (i);
 }
 
-int    ft_reader(const char *str, va_list args, t_flags *flags)
+int	ft_reader(const char *str, va_list args, t_flags *flags)
 {
 	int n;
 	int i;
@@ -137,20 +115,24 @@ int    ft_reader(const char *str, va_list args, t_flags *flags)
 		if (str[i] == '%' && str[i + 1] == '%')
 		{
 			ft_putchar(str[i]);
+			chars++;
 			i++;
 		}
-		else if (str[i] == '%' && str[i + 1])
+		if (str[i] == '%' && str[i + 1])
 		{
 			ft_startstruct(flags, n);
-			i = ft_checkflags(str, &flags[n], i + 1); // Store every flag on that variable
+			i = ft_checkflags(str, &flags[n], i + 1);
 			if (flags[n].type != 'a')
 			{
-				chars += ft_printer(args, flags, n); // Print that variable according to the flags
+				chars += ft_printer(args, flags, n);
 				n += 1;
 			}
 		}
 		else
+		{
 			ft_putchar(str[i]);
+			chars++;
+		}
 		i++;
 	}
 	return (chars);

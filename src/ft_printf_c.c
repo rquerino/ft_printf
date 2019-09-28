@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 13:25:56 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/05 14:10:26 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 11:38:16 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 ** %c ignores all flags.
 */
 
-int ft_printf_c(va_list args, t_flags flags)
+int	ft_printf_c(va_list args, t_flags flags)
 {
-	int     var;
-	int		i;
+	int	var;
+	int	i;
 
 	i = 0;
 	var = va_arg(args, int);

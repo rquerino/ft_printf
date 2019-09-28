@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 10:10:01 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 14:28:38 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 12:20:28 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 ** the argument n.
 */
 
-int    ft_printer(va_list args, t_flags *flags, int n)
-{	
+int	ft_printer(va_list args, t_flags *flags, int n)
+{
 	if (flags[n].type == 's')
 		return (ft_printf_s(args, flags[n]));
 	else if (flags[n].type == 'c')
 		return (ft_printf_c(args, flags[n]));
-	else if	(flags[n].type == 'p')
+	else if (flags[n].type == 'p')
 		return (ft_printf_p(args, flags[n]));
-	else if	(flags[n].type == 'd' || flags[n].type == 'i')
+	else if (flags[n].type == 'd' || flags[n].type == 'i')
 		return (ft_printf_di(args, flags[n]));
 	else if (flags[n].type == 'o')
 		return (ft_printf_o(args, flags[n]));

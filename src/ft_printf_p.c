@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 22:50:11 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 15:20:24 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 11:55:08 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	ft_printp(char *res)
 	}
 }
 
-// store 16-bit address, and then pretend that memory is a character array
+/*
+** store 16-bit address, and then pretend that memory is a character array
+*/
 
 int		ft_printf_p(va_list args, t_flags flags)
 {
@@ -77,8 +79,7 @@ int		ft_printf_p(va_list args, t_flags flags)
 	i = 0;
 	var = (unsigned long int)va_arg(args, void *);
 	res = ft_transform_base(var, 16);
-	len = ft_strlen(res);
-	len += 2;
+	len = ft_strlen(res) + 2;
 	if (flags.width <= len)
 		ft_printp(res);
 	else if (flags.width > len)

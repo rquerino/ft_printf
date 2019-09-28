@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 13:45:15 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/27 15:07:27 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 12:11:29 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,34 @@ void	ft_width_notjustify(t_flags flags, int len, char *var)
 		}
 		while (var[i])
 			ft_putchar(var[i++]);
+		return ;
 	}
-	else
-	{
-		i = 0;
-		if (flags.plus || flags.hiddenplus)
-			i++;
-		if (flags.plus)
-			ft_putchar('+');
-		if (flags.hiddenplus)
-			ft_putchar(' ');
-		while (i++ < flags.width - len)
-			ft_putchar('0');
-		ft_putstr(var);
-	}
+	i = 0;
+	if (flags.plus || flags.hiddenplus)
+		i++;
+	if (flags.plus)
+		ft_putchar('+');
+	if (flags.hiddenplus)
+		ft_putchar(' ');
+	while (i++ < flags.width - len)
+		ft_putchar('0');
+	ft_putstr(var);
 }
 
 void	ft_width_f(t_flags flags, char *var, int len)
 {
 	int	i;
 
-	i = 0;
+	i = flags.hashtag == 1 && flags.afterdot == 0 ? 1 : 0;
 	if (flags.justify == 1)
 	{
 		ft_nowidth_f(flags, var);
-		if (flags.hashtag == 1 && flags.afterdot == 0)
-			i++;
 		if (flags.zero == 1 && flags.afterdot > 1)
-			while ((flags.plus == 1 || flags.hiddenplus == 1) && var[0] != '-'?
+			while ((flags.plus == 1 || flags.hiddenplus == 1) && var[0] != '-' ?
 				i++ < (flags.width - (len + 1)) : i++ < (flags.width - len))
 				ft_putchar('0');
 		else
-			while ((flags.plus == 1 || flags.hiddenplus == 1) && var[0] != '-'?
+			while ((flags.plus == 1 || flags.hiddenplus == 1) && var[0] != '-' ?
 				i++ < (flags.width - (len + 1)) : i++ < (flags.width - len))
 				ft_putchar(' ');
 	}
@@ -87,17 +83,19 @@ void	ft_width_f(t_flags flags, char *var, int len)
 int		ft_printf_f(va_list args, t_flags flags)
 {
 	int		len;
-    char    *var;
+	char	*var;
 
-    if (flags.L == 1)
-        var = ft_ldtoa(va_arg(args, long double), flags.afterdot || flags.justdot ? flags.afterdot : 6);
+	if (flags.up_l == 1)
+		var = ft_ldtoa(va_arg(args, long double), flags.afterdot
+			|| flags.justdot ? flags.afterdot : 6);
 	else
-		var = ft_dtoa(va_arg(args, double), flags.afterdot || flags.justdot ? flags.afterdot : 6);
+		var = ft_dtoa(va_arg(args, double), flags.afterdot
+			|| flags.justdot ? flags.afterdot : 6);
 	len = ft_strlen(var);
 	if (flags.width <= len)
 		ft_nowidth_f(flags, var);
 	else
 		ft_width_f(flags, var, len);
 	ft_strdel(&var);
-	return (0);
+	return (flags.width > len ? flags.width : len);
 }
