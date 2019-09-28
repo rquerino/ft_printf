@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 11:33:02 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 11:34:47 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 13:59:37 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,10 @@ char	*ft_lltoa(long long n)
 char	*ft_ltoa(long n)
 {
 	return (ft_lltoa(n));
+}
+
+int		ft_putchar_ptf(char c)
+{
+	write(1, &c, 1);
+	return (1);
 }

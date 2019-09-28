@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 21:22:26 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 12:05:39 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 15:09:12 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,7 @@ void	ft_makehexlower(char *var)
 void	ft_width_x(t_flags flags, char *res, int len, char *var)
 {
 	if (flags.justify == 1)
-	{
-		if (flags.hashtag && ft_strcmp(var, "0") != 0)
-			ft_print0x(flags.type);
-		if (flags.type == 'x')
-			ft_makehexlower(res);
-		else
-			ft_putstr(res);
-		ft_fillwidth(flags, flags.width - len);
-	}
+		ft_printjustify_x(flags, res, len, var);
 	else
 	{
 		if (flags.zero == 1 && flags.afterdot == 0 && flags.justdot == 0)
@@ -95,22 +87,12 @@ int		ft_printf_x(va_list args, t_flags flags)
 	char	*var;
 	char	*res;
 
-	if (flags.h == 1)
-		var = ft_utoa_base((unsigned short)va_arg(args, unsigned), 16);
-	else if (flags.hh == 1)
-		var = ft_utoa_base((unsigned char)va_arg(args, unsigned), 16);
-	else if (flags.l == 1)
-		var = ft_ulltoa_base(va_arg(args, unsigned long), 16);
-	else if (flags.ll == 1)
-		var = ft_ulltoa_base(va_arg(args, unsigned long long), 16);
-	else
-		var = ft_utoa_base(va_arg(args, unsigned), 16);
+	var = ft_getvar_x(args, flags);
 	len = ft_strlen(var);
 	res = (flags.afterdot > len || flags.justdot == 1) ?
 		ft_precision_x(flags, var, len) : ft_strdup(var);
-	len = (flags.afterdot > len || flags.justdot == 1) ?
-		flags.afterdot : len;
-	if (var && (flags.hashtag && ft_strcmp(var, "0") != 0) && flags.justdot == 0)
+	len = (flags.afterdot > len || flags.justdot == 1) ? flags.afterdot : len;
+	if (var && flags.hashtag && ft_strcmp(var, "0") != 0 && flags.justdot == 0)
 		len += 2;
 	if (flags.width > len)
 		ft_width_x(flags, res, len, var);

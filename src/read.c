@@ -6,14 +6,14 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 12:41:01 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 14:05:12 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	ft_getlength(const char *str, t_flags *flags, int i)
+int		ft_getlength(const char *str, t_flags *flags, int i)
 {
 	if (str[i] == 'l')
 	{
@@ -40,7 +40,7 @@ int	ft_getlength(const char *str, t_flags *flags, int i)
 	return (i);
 }
 
-int	ft_getwidth(const char *str, t_flags *flags, int i)
+int		ft_getwidth(const char *str, t_flags *flags, int i)
 {
 	int	width;
 
@@ -54,7 +54,7 @@ int	ft_getwidth(const char *str, t_flags *flags, int i)
 	return (i - 1);
 }
 
-int	ft_getafterdot(const char *str, t_flags *flags, int i)
+int		ft_getafterdot(const char *str, t_flags *flags, int i)
 {
 	int afterdot;
 	int	justdot;
@@ -73,7 +73,7 @@ int	ft_getafterdot(const char *str, t_flags *flags, int i)
 	return (i - 1);
 }
 
-int	ft_checkflags(const char *str, t_flags *flags, int i)
+int		ft_checkflags(const char *str, t_flags *flags, int i)
 {
 	while (str[i] != 'c' && str[i] != 'd' && str[i] != 'f' && str[i] != 'p'
 		&& str[i] != 'i' && str[i] != 'o' && str[i] != 's' && str[i] != 'u'
@@ -101,39 +101,29 @@ int	ft_checkflags(const char *str, t_flags *flags, int i)
 	return (i);
 }
 
-int	ft_reader(const char *str, va_list args, t_flags *flags)
+void	ft_reader(const char *str, va_list args, t_flags *flags, int ret)
 {
 	int n;
 	int i;
-	int	chars;
 
 	i = 0;
 	n = 0;
-	chars = 0;
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1] == '%')
-		{
-			ft_putchar(str[i]);
-			chars++;
-			i++;
-		}
-		if (str[i] == '%' && str[i + 1])
+			ret += ft_putchar_ptf(str[i++]);
+		else if (str[i] == '%' && str[i + 1])
 		{
 			ft_startstruct(flags, n);
 			i = ft_checkflags(str, &flags[n], i + 1);
 			if (flags[n].type != 'a')
 			{
-				chars += ft_printer(args, flags, n);
+				ret += ft_printer(args, flags, n);
 				n += 1;
 			}
 		}
 		else
-		{
-			ft_putchar(str[i]);
-			chars++;
-		}
+			ret += ft_putchar_ptf(str[i]);
 		i++;
 	}
-	return (chars);
 }

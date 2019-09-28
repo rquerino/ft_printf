@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:55 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 11:42:09 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 14:58:39 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ void	ft_nowidth_di(t_flags flags, char *var)
 
 void	ft_width_di(t_flags flags, char *var, int len)
 {
-	int isneg;
-
-	isneg = 0;
 	if (flags.justify == 1)
 	{
 		ft_nowidth_di(flags, var);
@@ -73,20 +70,12 @@ void	ft_width_di(t_flags flags, char *var, int len)
 	}
 	else if (flags.zero == 1 && flags.afterdot == 0 && flags.justdot == 0)
 	{
-		if (var[0] != '-' && flags.plus == 1)
-			ft_putchar('+');
-		else if (var[0] != '-' && flags.hiddenplus == 1)
-			ft_putchar(' ');
+		if (var[0] != '-' && (flags.plus || flags.hiddenplus))
+			ft_putchar(flags.plus ? '+' : ' ');
 		else if (var[0] == '-')
-		{
 			ft_putchar('-');
-			isneg = 1;
-		}
 		ft_fillwidth(flags, flags.width - len);
-		if (var[0] == '-')
-			ft_putstr(var + 1);
-		else
-			ft_putstr(var);
+		ft_putstr(var[0] == '-' ? var + 1 : var);
 	}
 	else
 	{
@@ -110,16 +99,7 @@ int		ft_printf_di(va_list args, t_flags flags)
 	char	*var;
 	char	*final;
 
-	if (flags.h == 1)
-		var = ft_itoa((short)va_arg(args, int));
-	else if (flags.hh == 1)
-		var = ft_itoa((char)va_arg(args, int));
-	else if (flags.l == 1)
-		var = ft_ltoa(va_arg(args, long));
-	else if (flags.ll == 1)
-		var = ft_lltoa(va_arg(args, long long));
-	else
-		var = ft_itoa(va_arg(args, int));
+	var = ft_getvar_di(args, flags);
 	len = ft_strlen(var);
 	if (len - (var[0] == '-' ? 1 : 0) < flags.afterdot || flags.justdot == 1)
 		final = ft_precision_di(var, flags.afterdot, len);

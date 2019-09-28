@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 12:35:16 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 15:09:58 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int				ft_getwidth(const char *str, t_flags *flags, int i);
 int				ft_getafterdot(const char *str, t_flags *flags, int i);
 int				ft_getlength(const char *str, t_flags *flags, int i);
 int				ft_checkflags(const char *str, t_flags *flags, int i);
-int				ft_reader(const char *str, va_list args, t_flags *flags);
+void			ft_reader(const char *str, va_list args, t_flags *flags,
+							int ret);
+int				ft_putchar_ptf(char c);
 void			ft_startstruct(t_flags *flags, int n);
 int				ft_getlen(va_list args, int n);
 char			*ft_readflags(t_flags flags, int arg_len, va_list args, int n);
@@ -79,6 +81,7 @@ char			*ft_transform_base(unsigned long long n, int base);
 int				ft_blen(unsigned long long n, int base);
 
 int				ft_printf_di(va_list args, t_flags flags);
+char			*ft_getvar_di(va_list args, t_flags flags);
 void			ft_width_di(t_flags flags, char *var, int len);
 void			ft_nowidth_di(t_flags flags, char *var);
 void			ft_fillwidth(t_flags flags, int len);
@@ -92,9 +95,13 @@ int				ft_printf_u(va_list args, t_flags flags);
 char			*ft_precision_u(t_flags flags, char *var, int len);
 
 int				ft_printf_x(va_list args, t_flags flags);
+char			*ft_getvar_x(va_list args, t_flags flags);
 void			ft_makehexlower(char *var);
 char			*ft_precision_x(t_flags flags, char *var, int len);
+void			ft_printjustify_x(t_flags flags, char *res, int len,
+							char *var);
 void			ft_width_x(t_flags flags, char *res, int len, char *var);
+void			ft_print0x(char type);
 
 int				ft_printf_f(va_list args, t_flags flags);
 void			ft_nowidth_f(t_flags flags, char *var);
