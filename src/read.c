@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 14:05:12 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 16:34:17 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,14 @@ int		ft_checkflags(const char *str, t_flags *flags, int i)
 	return (i);
 }
 
-void	ft_reader(const char *str, va_list args, t_flags *flags, int ret)
+int		ft_reader(const char *str, va_list args, t_flags *flags, int ret)
 {
 	int n;
 	int i;
 
 	i = 0;
 	n = 0;
+	ret = 0;
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1] == '%')
@@ -126,4 +127,5 @@ void	ft_reader(const char *str, va_list args, t_flags *flags, int ret)
 			ret += ft_putchar_ptf(str[i]);
 		i++;
 	}
+	return (ret);
 }

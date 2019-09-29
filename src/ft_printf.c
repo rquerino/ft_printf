@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 14:05:02 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 16:41:33 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		ft_printf(const char *str, ...)
 	n_args = ft_countargs(str) + 1;
 	flags = malloc(sizeof(t_flags) * n_args);
 	va_start(args, str);
-	ft_reader(str, args, flags, ret);
+	ret = ft_reader(str, args, flags, ret);
 	va_end(args);
 	free(flags);
 	return (ret);

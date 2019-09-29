@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:21 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 15:09:58 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 16:41:12 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int				ft_getwidth(const char *str, t_flags *flags, int i);
 int				ft_getafterdot(const char *str, t_flags *flags, int i);
 int				ft_getlength(const char *str, t_flags *flags, int i);
 int				ft_checkflags(const char *str, t_flags *flags, int i);
-void			ft_reader(const char *str, va_list args, t_flags *flags,
-							int ret);
+int				ft_reader(const char *str, va_list args, t_flags *flags,
+						int ret);
 int				ft_putchar_ptf(char c);
 void			ft_startstruct(t_flags *flags, int n);
 int				ft_getlen(va_list args, int n);
