@@ -6,12 +6,11 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 15:14:53 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 16:34:17 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 18:56:34 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int		ft_getlength(const char *str, t_flags *flags, int i)
 {
@@ -75,9 +74,9 @@ int		ft_getafterdot(const char *str, t_flags *flags, int i)
 
 int		ft_checkflags(const char *str, t_flags *flags, int i)
 {
-	while (str[i] != 'c' && str[i] != 'd' && str[i] != 'f' && str[i] != 'p'
-		&& str[i] != 'i' && str[i] != 'o' && str[i] != 's' && str[i] != 'u'
-		&& str[i] != 'x' && str[i] != 'X' && str[i] != '%')
+	while (str[i] && (str[i] != 'c' && str[i] != 'd' && str[i] != 'f'
+		&& str[i] != 'p' && str[i] != 'i' && str[i] != 'o' && str[i] != 's'
+		&& str[i] != 'u' && str[i] != 'x' && str[i] != 'X' && str[i] != '%'))
 	{
 		if (str[i] == '-')
 			flags->justify = 1;
@@ -117,15 +116,15 @@ int		ft_reader(const char *str, va_list args, t_flags *flags, int ret)
 		{
 			ft_startstruct(flags, n);
 			i = ft_checkflags(str, &flags[n], i + 1);
-			if (flags[n].type != 'a')
+			if (flags[n].type != 'a' && flags[n].type != 0)
 			{
 				ret += ft_printer(args, flags, n);
 				n += 1;
 			}
 		}
-		else
+		else if (str[i] && str[i] != '%')
 			ret += ft_putchar_ptf(str[i]);
-		i++;
+		i += str[i] ? 1 : 0;
 	}
 	return (ret);
 }

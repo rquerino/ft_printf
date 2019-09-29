@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:31:28 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 16:41:33 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/09/28 18:39:12 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ int		ft_countargs(const char *str)
 			i++;
 		if (str[i] == '%' && str[i + 1] != '%')
 		{
-			while (str[i] != 'c' && str[i] != 'd' && str[i] != 'e' &&
+			while (str[i] && (str[i] != 'c' && str[i] != 'd' && str[i] != 'e' &&
 				str[i] != 'f' && str[i] != 'g' && str[i] != 'i' &&
 				str[i] != 'o' && str[i] != 's' && str[i] != 'u' &&
-				str[i] != 'x' && str[i] != 'p')
+				str[i] != 'x' && str[i] != 'p' && str[i] == '%'))
 				i++;
-			n += 1;
+			if (str[i])
+				n += 1;
 		}
 		i++;
 	}
