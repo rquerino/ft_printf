@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 14:49:58 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 12:35:32 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/10/03 10:32:01 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*
 ** Elevates any number n to the power of pow. In this case, we're using to
-** round the numbers based on the precision passed.
+** round the numbers based on the precision passed. 10 ^ something.
 */
 
 double	ft_pow(double n, int pow)
@@ -25,7 +25,7 @@ double	ft_pow(double n, int pow)
 
 /*
 ** Function to round the number based on the precision. If the precision is 0,
-** checks if the first decimal is >= 5 and then rounds up.
+** checks if the first decimal is >= 5 and then rounds up. Returns the Aux nbr.
 */
 
 long	ft_round(long double n, int precision)
@@ -42,6 +42,10 @@ long	ft_round(long double n, int precision)
 	return (aux);
 }
 
+/*
+** Deals with cases where precision is 0.
+*/
+
 char	*ft_auxldtoa(long double n)
 {
 	if ((int)n == 0 && n < 0 && ((n - (int)n) * 10 < 5))
@@ -51,33 +55,39 @@ char	*ft_auxldtoa(long double n)
 	return (ft_itoa((int)n));
 }
 
+/*
+** Function to transform a double to string.
+** len: 3(neg) or 2(pos) + aux=/10 len++ or precision (0.something).
+** 3('-', at least 1nbr before dot and '.'), 2(without '-').
+** Can't handle numbers bigger than a max_int or min_int.
+*/
+
 char	*ft_ldtoa(long double n, int precision)
 {
-	char		*s;
+	char		*res;
 	long long	aux;
-	long long	t;
-	int			length;
+	long long	tmp;
+	int			len;
 
 	if (precision == 0)
 		return (ft_auxldtoa(n));
 	aux = ft_round(n, precision);
-	t = (aux < 0) ? -aux : aux;
-	length = (n < 0 ? 3 : 2);
+	tmp = (aux < 0) ? -aux : aux;
+	len = (n < 0 ? 3 : 2);
 	while (aux /= 10)
-		++length;
-	(n < 1 && n > -1) ? length = 3 + precision : 0;
-	(n >= 0 && n < 1) ? length = 2 + precision : 0;
-	if (!(s = (char *)malloc(sizeof(char) * length)))
+		len++;
+	(n < 0 && n > -1) ? len = 3 + precision : 0;
+	(n >= 0 && n < 1) ? len = 2 + precision : 0;
+	if (!(res = ft_strnew(len)))
 		return (NULL);
-	s[length] = '\0';
-	while (length--)
+	while (len--)
 	{
-		s[length] = (!precision--) ? '.' : t % 10 + '0';
-		t /= (precision + 1) ? 10 : 1;
+		res[len] = (!precision--) ? '.' : tmp % 10 + '0';
+		tmp /= (precision + 1) ? 10 : 1;
 	}
 	if (n < 0)
-		s[0] = '-';
-	return (s);
+		res[0] = '-';
+	return (res);
 }
 
 char	*ft_dtoa(double n, int precision)

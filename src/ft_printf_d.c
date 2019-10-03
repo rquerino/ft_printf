@@ -6,7 +6,7 @@
 /*   By: rquerino <rquerino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:10:55 by rquerino          #+#    #+#             */
-/*   Updated: 2019/09/28 19:32:45 by rquerino         ###   ########.fr       */
+/*   Updated: 2019/10/01 11:50:29 by rquerino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char	*ft_precision_di(char *var, int precision, int len)
 	int		j;
 	char	*final;
 
-	if (precision == 0)
+	if (precision == 0 && var[0] == '0')
 		return (ft_strnew(0));
+	else if (precision == 0)
+		return (ft_strdup(var));
 	i = 0;
 	j = 0;
 	final = (var[0] == '-') ? ft_strnew(precision + 1) : ft_strnew(precision);
@@ -45,7 +47,8 @@ void	ft_fillwidth(t_flags flags, int len)
 {
 	while (len-- > 0)
 	{
-		if (flags.zero == 1 && flags.afterdot == 0 && flags.justdot == 0)
+		if (flags.zero && flags.afterdot == 0 && flags.justdot == 0
+			&& flags.justify == 0)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
